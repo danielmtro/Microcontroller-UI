@@ -38,3 +38,15 @@ Anything else triggers a writing to the serial port to say "error, invalid comma
 3. 7 seg module that changes the number based on a variable
 
 4. Tweaking the write to serial char output 
+
+
+Things decided for this week:
+Everyone picks a module they wanna design - if its easy do another one. 
+Let everyone know that you're doing the module so no one does it twice.
+Let the group know when you're working on the file to avoid conflicts when merging
+
+Communication Platform: Facebook Messenger (discord is for nerds)
+
+Goals for next week:
+Finish all the modules for exercise 1
+Make a solid start on exercise 2
