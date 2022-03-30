@@ -8,10 +8,10 @@ Planned the modules that will be requried.
 
 Task - 1
 
-1. Serial Initialise
+1. Serial Initialise (DONE)
 2. Interrupt function
-3. Write function
-4. Read function
+3. Write function (DONE)
+4. Read function 
 
 Task - 2
 
@@ -22,6 +22,7 @@ Potential design for a command
 L 0
 L 1
 W "string"
+Help
 
 S (0-9)
 
@@ -30,6 +31,7 @@ Where:
       L 1 refers to turning on the leds
       S refers to operating the 7 seg and displaying a particular number that's specified after
       W sends out the string that follows the letter
+      Help - displays everything the user can do.
 
 Anything else triggers a writing to the serial port to say "error, invalid command"
 
