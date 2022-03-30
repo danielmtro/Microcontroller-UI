@@ -58,3 +58,46 @@ void SerialOutputString(char *pt, SerialPort *serial_port) {
     pt++;
   }            
 }
+
+
+//use address 20 for SCI0
+//use address 21 for SCI1
+
+interrupt 21 void serialISR() 
+{
+  
+  // Check if data is received. The RDRF flag
+  if (SCI1SR1 & 0x20) 
+  {
+    // End of sentence? Look for a carriage return
+    if (SCI1DRL == 0x0D) 
+    {    
+     read_sentence[read_index] = '\0';
+     read_index = 0;
+     return   
+    } 
+    // Store each character of sentence in buffer
+    else
+    {
+      read_sentence[read_index] = SCI1DRL;
+      read_index++;
+      
+      if(read_index == 100) {
+       //execute some error message  
+      }
+      
+      return 
+    }
+    
+   }
+   
+}
+
+void clear_string(char* string) {
+
+  for(int i = 0; i < BUFFER; i++) {
+   string[i] = '\0'; 
+  }
+  
+  return 
+}
