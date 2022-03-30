@@ -1,0 +1,40 @@
+Lab 1:
+
+Members Present: Will, Daniel 
+Missing members today: Henry
+
+Tasks accomplished today:
+Planned the modules that will be requried.
+
+Task - 1
+
+1. Serial Initialise
+2. Interrupt function
+3. Write function
+4. Read function
+
+Task - 2
+
+1. Design string handling function that takes in command and outputs specific
+
+Potential design for a command 
+
+L 0
+L 1
+W "string"
+
+S (0-9)
+
+Where:
+      L 0 refers to turning off the leds
+      L 1 refers to turning on the leds
+      S refers to operating the 7 seg and displaying a particular number that's specified after
+      W sends out the string that follows the letter
+
+Anything else triggers a writing to the serial port to say "error, invalid command"
+
+2. LED module that changes on or off based on a variable
+
+3. 7 seg module that changes the number based on a variable
+
+4. Tweaking the write to serial char output 
