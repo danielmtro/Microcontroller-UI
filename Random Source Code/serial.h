@@ -44,5 +44,7 @@ void SerialOutputChar(char, SerialPort *serial_port);
 // Input: pointer to a NULL-TERMINATED string (if not null terminated, there will be problems)
 void SerialOutputString(char *pt, SerialPort *serial_port); 
  
+
+void clear_string(char* string);
  
 #endif
