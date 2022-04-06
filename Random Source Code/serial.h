@@ -19,13 +19,21 @@ typedef struct SerialPort {
 //   they are fixed values)
 extern SerialPort SCI0, SCI1;
 
-
+//sets up the serial registers
 void serialRegisters(void);
 
+
+//takes a letter input and prints it to the terminal
+void SerialOutputChar(char letter);
+
+
+//takes as an input a string and its lenghth.
+//Prints the string to the terminal
 void SerialOutputString(char* string,int length);
  
 
 //set all the values in a string to a null value
 void clear_string(char* string);
+
  
 #endif

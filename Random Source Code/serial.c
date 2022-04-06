@@ -54,6 +54,13 @@ void SerialOutputString(char* string,int length){
 }
 
 
+void SerialOutputChar(char letter){
+
+  while(!(SCI1SR1 & 0x80));
+        
+  // Write to serial
+  SCI1DRL = letter;
+}
 
 void clear_string(char* string) {
   int i;
