@@ -33,6 +33,8 @@ void main()
   SerialOutputString(complete, strlen(complete));
   
   
+  
+  
   //Exercise 2 demonstration
   
   //poll command char
