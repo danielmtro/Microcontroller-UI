@@ -9,12 +9,13 @@
 
 interrupt 21 void serialISR();
 
+
+//global variables involved in interrupt sequence
+
+
 char sentence[BUFFER];  //takes input 
-
 char command[BUFFER];   //stores the serial input
-
 int j = 0;     //keeps track of the length of command
-int exercise_1_flag = 0;
 
 
 //new command is zero if there is a new command that hasn't been read
@@ -23,7 +24,7 @@ int new_command = 0;
 
 void main() 
 {
-
+  int exercise_1_flag = 0;
   char* completed_1 = "Exercise 1 completed!";
   
   
