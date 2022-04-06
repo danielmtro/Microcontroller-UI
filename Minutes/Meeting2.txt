@@ -1,0 +1,12 @@
+#Lab 2
+
+Date: 6/04/2022
+
+Present: All
+
+Things completed last week:
+- Got serial initialise working
+- Can read in input
+- Can write to terminal 
+- Finished exercise 1
+
