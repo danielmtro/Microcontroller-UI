@@ -19,7 +19,7 @@ int exercise_1_flag = 0;
 void main() 
 {
 
-  char* complete = "Exercise 1 completed!";
+  char* completed_1 = "Exercise 1 completed!";
   
   
   serialRegisters();
@@ -30,7 +30,7 @@ void main()
   while(exercise_1_flag == 0){
   }
   
-  SerialOutputString(complete, strlen(complete));
+  SerialOutputString(completed_1, strlen(complete));
   
   
   
