@@ -1,10 +1,15 @@
 #include <hidef.h>      /* common defines and macros */
 #include "derivative.h"      /* derivative-specific definitions */
+#include <string.h>
+
+
+#define BUFFER 10
+
 
 void serialRegisters(void);
 interrupt 21 void serialISR();
 
-char buffer[500];
+char sentence[BUFFER];
 int j = 0;
 
 void main() 
@@ -30,7 +35,11 @@ void serialRegisters(void)
 
 interrupt 21 void serialISR() 
 {
+  int i = 0;
   int k = 0;
+  
+  char* error_sentence = "You've exceeded the buffer limit. Try again!\n";
+  int length = strlen(error_sentence);
   
   // Check if data is received. The RDRF flag
   if (SCI1SR1 & 0x20) 
@@ -49,9 +58,14 @@ interrupt 21 void serialISR()
         while(!(SCI1SR1 & 0x80));
         
         // Write to serial
-        SCI1DRL = buffer[k];
+        SCI1DRL = sentence[k];
         
       }
+      
+      while(!(SCI1SR1 & 0x80));
+        
+       // Write to serial
+       SCI1DRL = 0x0D;
       
       // Reset buffer
       j = 0;
@@ -60,8 +74,24 @@ interrupt 21 void serialISR()
     // Store each character of sentence in buffer
     else
     {
-      buffer[j] = SCI1DRL;
+      sentence[j] = SCI1DRL;
       j = j + 1;
+      
+      if(j == BUFFER) {
+      
+         for (i = 0; i < length; i++) 
+        {
+          // Wait for data to be ready
+          while(!(SCI1SR1 & 0x80));
+          
+          // Write to serial
+          SCI1DRL = error_sentence[i];
+          
+        }
+      
+       j = 0; //Reset buffer
+        
+      }
     }
   }
 }
