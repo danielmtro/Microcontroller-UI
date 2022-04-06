@@ -16,6 +16,11 @@ char command[BUFFER];   //stores the serial input
 int j = 0;     //keeps track of the length of command
 int exercise_1_flag = 0;
 
+
+//new command is zero if there is a new command that hasn't been read
+//if the command has been read it will be zero
+int new_command = 0;
+
 void main() 
 {
 
@@ -31,7 +36,6 @@ void main()
   }
   
   SerialOutputString(completed_1, strlen(complete));
-  
   
   
   
@@ -61,7 +65,13 @@ interrupt 21 void serialISR()
       
     
       sentence[j] = '\0';
+      
+      //copies sentence to command 
       strcpy(command, sentence);
+      
+      //sets command to 1 to make sure program knows there is a new command that hasn't been read
+      new_command = 1;
+      
       SerialOutputString(sentence, j);
       
       // Reset buffer
