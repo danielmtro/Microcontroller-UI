@@ -16,6 +16,7 @@ mc9s12dg256.c.o                         Model: SMALL,         Lang: ANSI-C
 main.c.o                                Model: SMALL,         Lang: ANSI-C
 Start12.c.o                             Model: SMALL,         Lang: ANSI-C
 STRING.C.o (ansisi.lib)                 Model: SMALL,         Lang: ANSI-C
+serial.c.o                              Model: SMALL,         Lang: ANSI-C
 
 *********************************************************************************************
 STARTUP SECTION
@@ -24,8 +25,8 @@ Entry point: 0xC029 (_Startup)
 _startupData is allocated at 0xC031 and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x1100     12
-  _Copy    *toCopyDownBeg 0xC10B
+  _Range   pZeroOut       0x1100     62
+  _Copy    *toCopyDownBeg 0xC13A
 } _startupData;
 
 *********************************************************************************************
@@ -35,8 +36,8 @@ Section Name                    Size  Type     From       To       Segment
 .init                             49     R     0xC000     0xC030   ROM_C000
 .startData                        10     R     0xC031     0xC03A   ROM_C000
 .rodata1                          46     R     0xC03B     0xC068   ROM_C000
-.text                            162     R     0xC069     0xC10A   ROM_C000
-.copy                              2     R     0xC10B     0xC10C   ROM_C000
+.text                            209     R     0xC069     0xC139   ROM_C000
+.copy                              2     R     0xC13A     0xC13B   ROM_C000
 .stack                           256   R/W     0x1000     0x10FF   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
@@ -381,12 +382,12 @@ Section Name                    Size  Type     From       To       Segment
 .abs_section_2be                   2   N/I      0x2BE      0x2BF   .absSeg340
 .abs_section_ffd4                  2     R     0xFFD4     0xFFD5   .absSeg341
 .bss                               2   R/W     0x1100     0x1101   RAM
-.common                           10   R/W     0x1102     0x110B   RAM
+.common                           60   R/W     0x1102     0x113D   RAM
 .vectSeg342_vect                   2     R     0xFFFE     0xFFFF   .vectSeg342
 
 Summary of section sizes per section type:
-READ_ONLY (R):         111 (dec:      273)
-READ_WRITE (R/W):      10C (dec:      268)
+READ_ONLY (R):         140 (dec:      320)
+READ_WRITE (R/W):      13E (dec:      318)
 NO_INIT (N/I):         190 (dec:      400)
 
 *********************************************************************************************
@@ -485,7 +486,7 @@ MODULE:                 -- mc9s12dg256.c.o --
      _SCI0DRL                                    CF       1       1       0   .abs_section_cf
      _SCI1CR1                                    D2       1       1       1   .abs_section_d2
      _SCI1CR2                                    D3       1       1       1   .abs_section_d3
-     _SCI1SR1                                    D4       1       1       5   .abs_section_d4
+     _SCI1SR1                                    D4       1       1       4   .abs_section_d4
      _SCI1SR2                                    D5       1       1       0   .abs_section_d5
      _SCI1DRH                                    D6       1       1       0   .abs_section_d6
      _SCI1DRL                                    D7       1       1       5   .abs_section_d7
@@ -746,13 +747,13 @@ MODULE:                 -- mc9s12dg256.c.o --
 MODULE:                 -- main.c.o --
 - PROCEDURES:
      main                                      C069       7       7       1   .text       
-     serialRegisters                           C070       E      14       1   .text       
-     serialISR                                 C07E      79     121       1   .text       
+     serialISR                                 C070      6F     111       1   .text       
 - VARIABLES:
      STRING.You.ve.exceeded.the..1             C03B      2E      46       1   .rodata1    
-     j                                         1100       2       2       4   .bss        
+     j                                         1100       2       2       5   .bss        
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
-     sentence                                  1102       A      10       2   .common     
+     sentence                                  1102      1E      30       4   .common     
+     command                                   1120      1E      30       1   .common     
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
      Init                                      C000      29      41       1   .init       
@@ -763,7 +764,13 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          1100       0       0       1               
 MODULE:                 -- STRING.C.o (ansisi.lib) --
 - PROCEDURES:
-     strlen                                    C0F7      14      20       1   .text       
+     strlen                                    C0DF      14      20       1   .text       
+     strcpy                                    C0F3       D      13       1   .text       
+- VARIABLES:
+MODULE:                 -- serial.c.o --
+- PROCEDURES:
+     serialRegisters                           C100       E      14       1   .text       
+     SerialOutputString                        C10E      2C      44       1   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -771,16 +778,17 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   mc9s12dg256.c.o                            400      0      0
-  main.c.o                                    12    142     48
+  main.c.o                                    62    118     48
   Start12.c.o                                  0     49      0
-  STRING.C.o (ansisi.lib)                      0     20      0
+  STRING.C.o (ansisi.lib)                      0     33      0
+  serial.c.o                                   0     58      0
   other                                      256     12      2
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
-  main serialRegisters serialISR strlen 
+  main serialISR strlen strcpy serialRegisters SerialOutputString 
 SECTION: ".bss"
   j 
 SECTION: ".init"
@@ -1472,7 +1480,7 @@ SECTION: ".abs_section_2be"
 SECTION: ".abs_section_ffd4"
   _Vector_21 
 SECTION: ".common"
-  sentence 
+  sentence command 
 
 *********************************************************************************************
 OBJECT LIST SORTED BY ADDRESS
@@ -1606,7 +1614,7 @@ OBJECT LIST SORTED BY ADDRESS
      _SCI1BD                                     D0       2       2       2   .abs_section_d0
      _SCI1CR1                                    D2       1       1       1   .abs_section_d2
      _SCI1CR2                                    D3       1       1       1   .abs_section_d3
-     _SCI1SR1                                    D4       1       1       5   .abs_section_d4
+     _SCI1SR1                                    D4       1       1       4   .abs_section_d4
      _SCI1SR2                                    D5       1       1       0   .abs_section_d5
      _SCI1DRH                                    D6       1       1       0   .abs_section_d6
      _SCI1DRL                                    D7       1       1       5   .abs_section_d7
@@ -1819,15 +1827,18 @@ OBJECT LIST SORTED BY ADDRESS
      _CAN4TXDLR                                 2BC       1       1       0   .abs_section_2bc
      _CAN4TXTBPR                                2BD       1       1       0   .abs_section_2bd
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
-     j                                         1100       2       2       4   .bss        
-     sentence                                  1102       A      10       2   .common     
+     j                                         1100       2       2       5   .bss        
+     sentence                                  1102      1E      30       4   .common     
+     command                                   1120      1E      30       1   .common     
      Init                                      C000      29      41       1   .init       
      _Startup                                  C029       8       8       0   .init       
      STRING.You.ve.exceeded.the..1             C03B      2E      46       1   .rodata1    
      main                                      C069       7       7       1   .text       
-     serialRegisters                           C070       E      14       1   .text       
-     serialISR                                 C07E      79     121       1   .text       
-     strlen                                    C0F7      14      20       1   .text       
+     serialISR                                 C070      6F     111       1   .text       
+     strlen                                    C0DF      14      20       1   .text       
+     strcpy                                    C0F3       D      13       1   .text       
+     serialRegisters                           C100       E      14       1   .text       
+     SerialOutputString                        C10E      2C      44       1   .text       
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
 
 *********************************************************************************************
@@ -1836,16 +1847,20 @@ UNUSED-OBJECTS SECTION
 NOT USED PROCEDURES
 STRING.C.o (ansisi.lib):
   strerror memchr memcmp memcpy2 memcpy _memcpy_8bitCount memmove memset 
-  _memset_clear_8bitCount strset strcat strncat strcpy strncpy strcmp strncmp 
-  strchr strrchr strspn strcspn strpbrk strstr strtok strcoll strxfrm 
+  _memset_clear_8bitCount strset strcat strncat strncpy strcmp strncmp strchr 
+  strrchr strspn strcspn strpbrk strstr strtok strcoll strxfrm 
+serial.c.o:
+  clear_string 
 NOT USED VARIABLES
 STRING.C.o (ansisi.lib):
   STRING..1 next.2 
+serial.c.o:
+  SCI1 SCI0 
 
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xC10B ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xC13A ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -1855,9 +1870,10 @@ OBJECT-DEPENDENCIES SECTION
 Init                      USES _startupData 
 _Startup                  USES __SEG_END_SSTACK Init main 
 main                      USES serialRegisters 
-serialRegisters           USES _SCI1BD _SCI1CR1 _SCI1CR2 
 serialISR                 USES STRING.You.ve.exceeded.the..1 strlen _SCI1SR1 
-                                _SCI1DRL sentence j 
+                                _SCI1DRL j sentence command strcpy SerialOutputString 
+serialRegisters           USES _SCI1BD _SCI1CR1 _SCI1CR2 
+SerialOutputString        USES _SCI1SR1 _SCI1DRL 
 _Vector_21                USES serialISR 
 
 *********************************************************************************************
@@ -1880,6 +1896,10 @@ DEPENDENCY TREE
  +- serialISR           
     | 
     +- strlen              
+    |    
+    +- strcpy              
+    |    
+    +- SerialOutputString  
          
 *********************************************************************************************
 STATISTIC SECTION
@@ -1888,5 +1908,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 7
-Total size of all blocks to be downloaded: 273
+Total size of all blocks to be downloaded: 320
 

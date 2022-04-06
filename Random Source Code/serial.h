@@ -20,10 +20,9 @@ typedef struct SerialPort {
 extern SerialPort SCI0, SCI1;
 
 
-
 void serialRegisters(void);
 
-void SerialOutputString(char* string);
+void SerialOutputString(char* string,int length);
  
 
 //set all the values in a string to a null value

@@ -1,16 +1,18 @@
 #include <hidef.h>      /* common defines and macros */
 #include "derivative.h"      /* derivative-specific definitions */
 #include <string.h>
+#include "string.h"
+
+#define BUFFER 30
 
 
-#define BUFFER 10
 
-
-void serialRegisters(void);
 interrupt 21 void serialISR();
 
-char sentence[BUFFER];
-int j = 0;
+char sentence[BUFFER];  //takes input 
+char command[BUFFER];   //stores the serial input
+
+int j = 0;     //keeps track of the length of command
 
 void main() 
 {
@@ -20,18 +22,7 @@ void main()
   for(;;);
 }
 
-void serialRegisters(void) 
-{
-  // Set baud rate to 9600
-  SCI1BDL = 0x9C;
-  SCI1BDH = 0;
-  
-  // No fancy stuff needed
-  SCI1CR1 = 0;
-  
-  // 2C = 0010110, Enable receive interrupt, transmit, receive
-  SCI1CR2 = 0x2C;
-}
+
 
 interrupt 21 void serialISR() 
 {
@@ -47,10 +38,8 @@ interrupt 21 void serialISR()
     // End of sentence? Look for a carriage return
     if (SCI1DRL == 0x0D) 
     {
-      // Don't do anything unless you are ready to send data. The TDRE flag
-      // May not need this line since I do it again below
-      while(!(SCI1SR1 & 0x80));
       
+      /*
       // Go through all characters in buffer
       for (k = 0; k < j; k++) 
       {
@@ -62,10 +51,10 @@ interrupt 21 void serialISR()
         
       }
       
-      while(!(SCI1SR1 & 0x80));
-        
-       // Write to serial
-       SCI1DRL = 0x0D;
+      */
+      sentence[j] = '\0';
+      strcpy(command, sentence);
+      SerialOutputString(sentence, j);
       
       // Reset buffer
       j = 0;
