@@ -1,7 +1,7 @@
 #include <hidef.h>      /* common defines and macros */
 #include "derivative.h"      /* derivative-specific definitions */
 #include <string.h>
-#include "string.h"
+#include "serial.h"
 
 #define BUFFER 30
 
@@ -10,14 +10,32 @@
 interrupt 21 void serialISR();
 
 char sentence[BUFFER];  //takes input 
+
 char command[BUFFER];   //stores the serial input
 
 int j = 0;     //keeps track of the length of command
+int exercise_1_flag = 0;
 
 void main() 
 {
+
+  char* complete = "Exercise 1 completed!";
+  
+  
   serialRegisters();
   EnableInterrupts;
+  
+  
+  //exercise 1 demonstration
+  while(exercise_1_flag == 0){
+  }
+  
+  SerialOutputString(complete, strlen(complete));
+  
+  
+  //Exercise 2 demonstration
+  
+  //poll command char
   
   for(;;);
 }
@@ -39,25 +57,15 @@ interrupt 21 void serialISR()
     if (SCI1DRL == 0x0D) 
     {
       
-      /*
-      // Go through all characters in buffer
-      for (k = 0; k < j; k++) 
-      {
-        // Wait for data to be ready
-        while(!(SCI1SR1 & 0x80));
-        
-        // Write to serial
-        SCI1DRL = sentence[k];
-        
-      }
-      
-      */
+    
       sentence[j] = '\0';
       strcpy(command, sentence);
       SerialOutputString(sentence, j);
       
       // Reset buffer
       j = 0;
+      
+      exercise_1_flag = 1;
     } 
     
     // Store each character of sentence in buffer
