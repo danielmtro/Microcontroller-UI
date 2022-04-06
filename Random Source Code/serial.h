@@ -20,31 +20,13 @@ typedef struct SerialPort {
 extern SerialPort SCI0, SCI1;
 
 
-enum {
-  BAUD_9600,
-  BAUD_19200,
-  BAUD_38400,
-  BAUD_57600,
-  BAUD_115200
-};
 
- 
-// SerialInitialise - initialise the serial port
-// Input: baud rate as defined in the enum
-void SerialInitialise(int baudRate, SerialPort *serial_port);
+void serialRegisters(void);
+
+void SerialOutputString(char* string);
  
 
-// SerialOutputChar - output a char to the serial port
-//  note: this version waits until the port is ready (not using interrupts)
-// Input: char to be transferred
-void SerialOutputChar(char, SerialPort *serial_port);  
- 
-
-// SerialOutputString - output a NULL TERMINATED string to the serial port
-// Input: pointer to a NULL-TERMINATED string (if not null terminated, there will be problems)
-void SerialOutputString(char *pt, SerialPort *serial_port); 
- 
-
+//set all the values in a string to a null value
 void clear_string(char* string);
  
 #endif

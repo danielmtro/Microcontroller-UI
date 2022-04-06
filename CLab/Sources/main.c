@@ -1,58 +1,67 @@
 #include <hidef.h>      /* common defines and macros */
 #include "derivative.h"      /* derivative-specific definitions */
-#include "serial.h"
 
-#define BUFFER 100
+void serialRegisters(void);
+interrupt 21 void serialISR();
 
-//this iterator keeps track of what index in the read_sentence you are up to
-volatile int read_index = 0;
-char read_sentence[BUFFER];
-char write_sentence[BUFFER];
+char buffer[500];
+int j = 0;
 
-void main(void) {
-  /* put your own code here */
+void main() 
+{
+  serialRegisters();
+  EnableInterrupts;
   
-  
-  
-	EnableInterrupts;
-  
-  write_sentence[0] = read_sentence[0];
-
-  for(;;) {
-    _FEED_COP(); /* feeds the dog */
-  } /* loop forever */
-  /* please make sure that you never leave main */
+  for(;;);
 }
 
-//use address 20 for SCI0
-//use address 21 for SCI1
+void serialRegisters(void) 
+{
+  // Set baud rate to 9600
+  SCI1BDL = 0x9C;
+  SCI1BDH = 0;
+  
+  // No fancy stuff needed
+  SCI1CR1 = 0;
+  
+  // 2C = 0010110, Enable receive interrupt, transmit, receive
+  SCI1CR2 = 0x2C;
+}
 
 interrupt 21 void serialISR() 
 {
+  int k = 0;
   
   // Check if data is received. The RDRF flag
   if (SCI1SR1 & 0x20) 
   {
     // End of sentence? Look for a carriage return
     if (SCI1DRL == 0x0D) 
-    {    
-     read_sentence[read_index] = '\0';
-     read_index = 0;
-     return;   
+    {
+      // Don't do anything unless you are ready to send data. The TDRE flag
+      // May not need this line since I do it again below
+      while(!(SCI1SR1 & 0x80));
+      
+      // Go through all characters in buffer
+      for (k = 0; k < j; k++) 
+      {
+        // Wait for data to be ready
+        while(!(SCI1SR1 & 0x80));
+        
+        // Write to serial
+        SCI1DRL = buffer[k];
+        
+      }
+      
+      // Reset buffer
+      j = 0;
     } 
+    
     // Store each character of sentence in buffer
     else
     {
-      read_sentence[read_index] = SCI1DRL;
-      read_index++;
-      
-      if(read_index == 100) {
-       //execute some error message  
-      }
-      
-      return; 
+      buffer[j] = SCI1DRL;
+      j = j + 1;
     }
-    
-   }
-   
+  }
 }
