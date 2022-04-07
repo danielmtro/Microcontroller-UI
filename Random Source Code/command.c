@@ -38,56 +38,33 @@ void run_instruction(char *instruction, int length) {
 */
 
 void sevensegmodule(int number){
+  unsigned char SegPat[10] = {
+  0x3F,         // pattern for 0
+  0x06,         // pattern for 1
+  0x5B,         // pattern for 2
+  0x4F,         // pattern for 3
+  0x66,         // pattern for 4
+  0x6D,         // pattern for 5
+  0x7D,         // pattern for 6
+  0x07,         // pattern for 7
+  0x7F,         // pattern for 8
+  0x6F          // pattern for 9
+  };       
+  
+  char digit[4] = {
+  0xFE,         //enable first seven seg
+  0xFD,         //enable second seven seg
+  0xFB,         //enable third seven seg
+  0xF7          //enable fourth seven seg
+  };
  
-  PORTB = 0x00; //sets 7-seg low
-  PTP = 0x07;   //turn the secod 7-seg on
-  PORTB = num_to_disp(number);
+ 
+  PORTB = 0; //sets 7-seg low
+  PTP = 0x07;  //turn the secod 7-seg on
+  PORTB = SegPat[number];
+
+  
+  
   return;   
 }
 
-int num_to_disp(int number){
-
-  switch(number){
-    
-    case 0:
-      return 0x3F;
-      break;
-    
-    case 1:
-      return 0x06;
-      break;
-     
-    case 2:
-      return 0x5B;
-      break;
-    
-    case 3:
-      return 0x4F;
-      break;
-    
-    case 4:
-      return 0x66;
-      break;
-    
-    case 5:
-      return 0x6D;
-      break;
-      
-    case 6:
-      return 0x7D;
-      break;
-     
-    case 7:
-      return 0x07;
-      break;
-    
-    case 8:
-      return 0x7F;
-      break;
-    
-    case 9:
-      return 0x6F;
-      break;      
-  }
-  
-}

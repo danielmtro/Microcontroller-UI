@@ -1,7 +1,9 @@
 #include <hidef.h>      /* common defines and macros */
 #include "derivative.h"      /* derivative-specific definitions */
 #include <string.h>
+#include <stdlib.h>
 #include "serial.h"
+#include "command.h"
 
 #define BUFFER 30
 
@@ -24,10 +26,13 @@ int new_command = 0;
 
 void main() 
 {
+  //variables used in 7-seg testing
+  int number;
   
+  //strings to be used in program
   char* completed_1 = "Exercise 1 completed!";
   char* welcome_message = "\nHello!\nTo proceed, please enter a command. If you don't know the current commands type 'H'.\nEnjoy!";
-  
+   
   
   serialRegisters();
   EnableInterrupts;
@@ -43,6 +48,25 @@ void main()
   
   //Exercise 2 demonstration
   SerialOutputString(welcome_message, strlen(welcome_message)); 
+  
+  
+  new_command = 0;
+  
+  //test 7-seg
+  
+  DDRB = 0xFF;  //enable 7-seg
+  PORTB = 0x00;
+  
+  while(command[0] != 'f'){
+    
+    if(new_command == 1 ) {
+      number = atoi(command);
+      sevensegmodule(number);
+      new_command = 0;
+    }
+  }
+  
+  
   
   
   //poll command char
@@ -68,8 +92,7 @@ interrupt 21 void serialISR()
     // End of sentence? Look for a carriage return
     if (SCI1DRL == 0x0D) 
     {
-      
-    
+      //add in null terminator to string    
       sentence[j] = '\0';
       
       //copies sentence to command 
@@ -78,11 +101,13 @@ interrupt 21 void serialISR()
       //sets command to 1 to make sure program knows there is a new command that hasn't been read
       new_command = 1;
       
+      //output the newline to terminal
       SerialOutputChar(0x0D);
       
       // Reset buffer
       j = 0;
       
+      //set flag to know that exercise 1 is complete
       exercise_1_flag = 1;
     } 
     
