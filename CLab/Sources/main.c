@@ -82,6 +82,8 @@ void main()
     //a little easter egg
     if(strcmp(command, "kill yourself") == 0){
       death_to_hcs12();
+      new_command = 0;
+      continue;
     }
     
     //runs the instruction that is parsed
@@ -192,7 +194,7 @@ void run_instruction(char *instruction) {
   int i;
   
   
-  if (command == 'L') {
+  if (command == 'L') {                                        // Handling for the LED functions
     char led_arg = instruction[2];
     if (led_arg == '0') {
       ledOff();  
@@ -204,14 +206,14 @@ void run_instruction(char *instruction) {
       SerialOutputString(error, strlen(error));
     }
   }
-  else if (command =='W') {
+  else if (command =='W') {                                    //Handling for writing an output
     string_out = instruction+2;
     SerialOutputString(string_out, strlen(string_out));
   }
-  else if (command == 'H') {
+  else if (command == 'H') {                                  //Handling for help function
     print_help();
   }
-  else if (command == 'S'){
+  else if (command == 'S'){                                  //Handling for 7-seg function
   
     for(i = 0; i < 10; i++){
       if(instruction[2] == nums[i]){
@@ -234,10 +236,10 @@ void run_instruction(char *instruction) {
        SerialOutputString(error_sseg, strlen(error_sseg));
       
     }
-  } else if (command == 'F'){
+  } else if (command == 'F'){                           //Exit command
        ledOff();
        SerialOutputString("exiting...", 10);
-  } else if (command == 'T'){
+  } else if (command == 'T'){                           //Handling for timed LED command
     
     sseg_arg = -1;
     for(i = 0; i < 10; i++){
@@ -269,8 +271,10 @@ void death_to_hcs12(){
   
   int i;
   
-  for(i = 0; i < 1000; i++){
+  for(i = 0; i < 100; i++){
     SerialOutputString("fuck you",8);                                
   }
+  
+  SerialOutputString("I'm still alive bitch, now enter a command.", 43);
   
 }

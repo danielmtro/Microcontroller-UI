@@ -8,5 +8,7 @@ void delay_ms(unsigned int time){
   int j;
     for(i=0;i<time;i++)
       for(j=0;j<4000;j++);
+      
+  return;
 }
 

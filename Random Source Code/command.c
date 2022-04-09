@@ -86,10 +86,10 @@ void timedLED(int time) {
 
 
 void print_help(){
-  char* message = "Hello!\nHere are the following commands\nType \"L 1\" or \"L 0\" to turn LED on and off\n";
+  char* message = "Hello!\nHere are the following commands\n\nType \"L 1\" or \"L 0\" to turn LED on and off\n";
   char* message2 = "Type \"S X\" to change the number on the seven segment display. Note X can be any number from 0-9\n";
   char* message3 = "Type T followed by an integer from 1-9 to turn the LED's on for a set number of seconds.\n";
-  char* message4 = "Type W followed by a string to display the string on the terminal.\nType \"F\" to exit\n";
+  char* message4 = "Type W followed by a string to display the string on the terminal.\n\nType \"F\" to exit\n";
   
   SerialOutputString(message, strlen(message));
   SerialOutputString(message2, strlen(message2));
