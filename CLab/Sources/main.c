@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "serial.h"
 #include "command.h"
+#include "timing.h"
 
 #define BUFFER 30
 
@@ -26,33 +27,31 @@ void main()
 {
   //variables used in 7-seg testing
   int number;
+  int i = 0;
   
   //strings to be used in program
   char* completed_1 = "Exercise 1 completed!";
   char* welcome_message = "\nHello!\nTo proceed, please enter a command. If you don't know the current commands type 'H'.\nEnjoy!";
    
-
-    // Disable all interrupts
-	asm("sei");
+  
+   // Disable all interrupts
+	DisableInterrupts;
 	
-	// Enable timer and fast flag clear
-	TSCR1 = 0x90; 
+	//enable serial input and output
+	serialRegisters();
+	
+	// Enable timer 
+	TSCR1 = TSCR1_TEN;
 	
 	// Set prescaler to 8
 	TSCR2 = 0x03;
 	
-	// Choose output compare for channel 5
-	TIOS = 0x20;
+	//reset overflow flag
+	TFLG2 =  TFLG2_TOF;
 	
-	// Toggle upon successful output compare 
-	TCTL1 = 0x04; 
-
-  // Enable interrupts for timer 5
-	TIE = 0x20;
 	
-  
-  serialRegisters();
   EnableInterrupts;
+  
   
   
   //exercise 1 demonstration
@@ -62,18 +61,22 @@ void main()
   SerialOutputString(completed_1, strlen(completed_1));
   
   
-  
   //Exercise 2 demonstration
   SerialOutputString(welcome_message, strlen(welcome_message)); 
   
-  
   new_command = 0;
+  
+  
+  //test speaker      - NOT WORKING ATM
+  DDRT = 0xFF;
+  PTT = 0b00100000;
+  TCTL1 = 0x04;   
   
   //test 7-seg
   
   DDRB  = 0xFF;  //enable 7-seg
   DDRP  = 0x3F;
-  PTP   = 0x01;
+  PTP   = 0x07;
   PORTB = 0x00;
   
   while(command[0] != 'f'){
