@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "C:\Users\Danie\OneDrive\Desktop\Uni\3rdYear\Group-7\CLab\bin\Project.absHCS12_Serial_Monitor.abs"
+PROGRAM "C:\Users\Danie\OneDrive\Desktop\Uni\3rdYear\Tron2\Group-7\CLab\bin\Project.absHCS12_Serial_Monitor.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -26,22 +26,22 @@ command.c.o                             Model: SMALL,         Lang: ANSI-C
 STARTUP SECTION
 ---------------------------------------------------------------------------------------------
 Entry point: 0xC029 (_Startup)
-_startupData is allocated at 0xC031 and uses 6 Bytes
+_startupData is allocated at 0xC03B and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
   _Range   pZeroOut       0x1100     68
-  _Copy    *toCopyDownBeg 0xC67B
+  _Copy    *toCopyDownBeg 0xC685
 } _startupData;
 
 *********************************************************************************************
 SECTION-ALLOCATION SECTION
 Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
-.init                             49     R     0xC000     0xC030   ROM_C000
-.startData                        10     R     0xC031     0xC03A   ROM_C000
-.rodata1                         168     R     0xC03B     0xC0E2   ROM_C000
-.text                           1156     R     0xC0E3     0xC566   ROM_C000
-.copy                              2     R     0xC67B     0xC67C   ROM_C000
+.init                             59     R     0xC000     0xC03A   ROM_C000
+.startData                        10     R     0xC03B     0xC044   ROM_C000
+.rodata1                         168     R     0xC045     0xC0EC   ROM_C000
+.text                           1156     R     0xC0ED     0xC570   ROM_C000
+.copy                              2     R     0xC685     0xC686   ROM_C000
 .stack                           256   R/W     0x1000     0x10FF   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
@@ -387,11 +387,11 @@ Section Name                    Size  Type     From       To       Segment
 .abs_section_ffd4                  2     R     0xFFD4     0xFFD5   .absSeg341
 .bss                               6   R/W     0x1100     0x1105   RAM
 .common                           62   R/W     0x1106     0x1143   RAM
-RUNTIME                          276     R     0xC567     0xC67A   ROM_C000
+RUNTIME                          276     R     0xC571     0xC684   ROM_C000
 .vectSeg342_vect                   2     R     0xFFFE     0xFFFF   .vectSeg342
 
 Summary of section sizes per section type:
-READ_ONLY (R):         681 (dec:     1665)
+READ_ONLY (R):         68B (dec:     1675)
 READ_WRITE (R/W):      144 (dec:      324)
 NO_INIT (N/I):         190 (dec:      400)
 
@@ -751,12 +751,12 @@ MODULE:                 -- mc9s12dg256.c.o --
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     main                                      C0E3      90     144       1   .text       
-     serialISR                                 C173      7D     125       1   .text       
+     main                                      C0ED      90     144       1   .text       
+     serialISR                                 C17D      7D     125       1   .text       
 - VARIABLES:
-     STRING.Exercise.1.completed.1             C03B      16      22       1   .rodata1    
-     STRING..Hello..To.proceed...2             C051      64     100       1   .rodata1    
-     STRING.You.ve.exceeded.the..3             C0B5      2E      46       1   .rodata1    
+     STRING.Exercise.1.completed.1             C045      16      22       1   .rodata1    
+     STRING..Hello..To.proceed...2             C05B      64     100       1   .rodata1    
+     STRING.You.ve.exceeded.the..3             C0BF      2E      46       1   .rodata1    
      j                                         1100       2       2       6   .bss        
      exercise_1_flag                           1102       2       2       2   .bss        
      new_command                               1104       2       2       4   .bss        
@@ -766,48 +766,48 @@ MODULE:                 -- main.c.o --
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
      Init                                      C000      29      41       1   .init       
-     _Startup                                  C029       8       8       0   .init       
+     _Startup                                  C029      12      18       0   .init       
 - VARIABLES:
-     _startupData                              C031       6       6       3   .startData  
+     _startupData                              C03B       6       6       3   .startData  
 - LABELS:
      __SEG_END_SSTACK                          1100       0       0       1               
 MODULE:                 -- CTYPE.C.o (ansisi.lib) --
 - PROCEDURES:
-     isdigit                                   C1F0       E      14       1   .text       
-     isspace                                   C1FE      17      23       2   .text       
-     toupper                                   C215      14      20       3   .text       
+     isdigit                                   C1FA       E      14       1   .text       
+     isspace                                   C208      17      23       2   .text       
+     toupper                                   C21F      14      20       3   .text       
 - VARIABLES:
 MODULE:                 -- STDLIB.C.o (ansisi.lib) --
 - PROCEDURES:
-     CheckCharWithBase                         C229      39      57       1   .text       
-     _strtoul                                  C262     170     368       8   .text       
-     _strtol                                   C3D2      D0     208       3   .text       
-     strtol                                    C4A2      13      19       1   .text       
+     CheckCharWithBase                         C233      39      57       1   .text       
+     _strtoul                                  C26C     170     368       8   .text       
+     _strtol                                   C3DC      D0     208       3   .text       
+     strtol                                    C4AC      13      19       1   .text       
 - VARIABLES:
 MODULE:                 -- STRING.C.o (ansisi.lib) --
 - PROCEDURES:
-     strlen                                    C4B5      14      20       2   .text       
-     strcpy                                    C4C9       D      13       1   .text       
+     strlen                                    C4BF      14      20       2   .text       
+     strcpy                                    C4D3       D      13       1   .text       
 - VARIABLES:
 MODULE:                 -- rtshc12.c.o (ansisi.lib) --
 - PROCEDURES:
-     _LCMP_P                                   C567      15      21       1   RUNTIME     
-     _LNEG                                     C57C       D      13       2   RUNTIME     
-     _LMULS16x32                               C589      1F      31       1   RUNTIME     
-     _lDivMod                                  C5A8      BE     190       1   RUNTIME     
-     _LDIVU                                    C666       E      14       1   RUNTIME     
-     _ILSEXT                                   C674       7       7       2   RUNTIME     
+     _LCMP_P                                   C571      15      21       1   RUNTIME     
+     _LNEG                                     C586       D      13       2   RUNTIME     
+     _LMULS16x32                               C593      1F      31       1   RUNTIME     
+     _lDivMod                                  C5B2      BE     190       1   RUNTIME     
+     _LDIVU                                    C670       E      14       1   RUNTIME     
+     _ILSEXT                                   C67E       7       7       2   RUNTIME     
 - VARIABLES:
      errno                                     1142       2       2       2   .common     
 MODULE:                 -- serial.c.o --
 - PROCEDURES:
-     serialRegisters                           C4D6       E      14       1   .text       
-     SerialOutputString                        C4E4      2C      44       1   .text       
-     SerialOutputChar                          C510       9       9       2   .text       
+     serialRegisters                           C4E0       E      14       1   .text       
+     SerialOutputString                        C4EE      2C      44       1   .text       
+     SerialOutputChar                          C51A       9       9       2   .text       
 - VARIABLES:
 MODULE:                 -- command.c.o --
 - PROCEDURES:
-     sevensegmodule                            C519      4E      78       1   .text       
+     sevensegmodule                            C523      4E      78       1   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -816,7 +816,7 @@ MODULE STATISTIC
 ---------------------------------------------------------------------------------------------
   mc9s12dg256.c.o                            400      0      0
   main.c.o                                    66    269    170
-  Start12.c.o                                  0     49      0
+  Start12.c.o                                  0     59      0
   CTYPE.C.o (ansisi.lib)                       0     57      0
   STDLIB.C.o (ansisi.lib)                      0    652      0
   STRING.C.o (ansisi.lib)                      0     33      0
@@ -1880,31 +1880,31 @@ OBJECT LIST SORTED BY ADDRESS
      command                                   1124      1E      30       3   .common     
      errno                                     1142       2       2       2   .common     
      Init                                      C000      29      41       1   .init       
-     _Startup                                  C029       8       8       0   .init       
-     STRING.Exercise.1.completed.1             C03B      16      22       1   .rodata1    
-     STRING..Hello..To.proceed...2             C051      64     100       1   .rodata1    
-     STRING.You.ve.exceeded.the..3             C0B5      2E      46       1   .rodata1    
-     main                                      C0E3      90     144       1   .text       
-     serialISR                                 C173      7D     125       1   .text       
-     isdigit                                   C1F0       E      14       1   .text       
-     isspace                                   C1FE      17      23       2   .text       
-     toupper                                   C215      14      20       3   .text       
-     CheckCharWithBase                         C229      39      57       1   .text       
-     _strtoul                                  C262     170     368       8   .text       
-     _strtol                                   C3D2      D0     208       3   .text       
-     strtol                                    C4A2      13      19       1   .text       
-     strlen                                    C4B5      14      20       2   .text       
-     strcpy                                    C4C9       D      13       1   .text       
-     serialRegisters                           C4D6       E      14       1   .text       
-     SerialOutputString                        C4E4      2C      44       1   .text       
-     SerialOutputChar                          C510       9       9       2   .text       
-     sevensegmodule                            C519      4E      78       1   .text       
-     _LCMP_P                                   C567      15      21       1   RUNTIME     
-     _LNEG                                     C57C       D      13       2   RUNTIME     
-     _LMULS16x32                               C589      1F      31       1   RUNTIME     
-     _lDivMod                                  C5A8      BE     190       1   RUNTIME     
-     _LDIVU                                    C666       E      14       1   RUNTIME     
-     _ILSEXT                                   C674       7       7       2   RUNTIME     
+     _Startup                                  C029      12      18       0   .init       
+     STRING.Exercise.1.completed.1             C045      16      22       1   .rodata1    
+     STRING..Hello..To.proceed...2             C05B      64     100       1   .rodata1    
+     STRING.You.ve.exceeded.the..3             C0BF      2E      46       1   .rodata1    
+     main                                      C0ED      90     144       1   .text       
+     serialISR                                 C17D      7D     125       1   .text       
+     isdigit                                   C1FA       E      14       1   .text       
+     isspace                                   C208      17      23       2   .text       
+     toupper                                   C21F      14      20       3   .text       
+     CheckCharWithBase                         C233      39      57       1   .text       
+     _strtoul                                  C26C     170     368       8   .text       
+     _strtol                                   C3DC      D0     208       3   .text       
+     strtol                                    C4AC      13      19       1   .text       
+     strlen                                    C4BF      14      20       2   .text       
+     strcpy                                    C4D3       D      13       1   .text       
+     serialRegisters                           C4E0       E      14       1   .text       
+     SerialOutputString                        C4EE      2C      44       1   .text       
+     SerialOutputChar                          C51A       9       9       2   .text       
+     sevensegmodule                            C523      4E      78       1   .text       
+     _LCMP_P                                   C571      15      21       1   RUNTIME     
+     _LNEG                                     C586       D      13       2   RUNTIME     
+     _LMULS16x32                               C593      1F      31       1   RUNTIME     
+     _lDivMod                                  C5B2      BE     190       1   RUNTIME     
+     _LDIVU                                    C670       E      14       1   RUNTIME     
+     _ILSEXT                                   C67E       7       7       2   RUNTIME     
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
 
 *********************************************************************************************
@@ -1944,7 +1944,7 @@ serial.c.o:
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xC67B ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xC685 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -2044,5 +2044,5 @@ STATISTIC SECTION
 ExeFile:
 --------
 Number of blocks to be downloaded: 5
-Total size of all blocks to be downloaded: 1665
+Total size of all blocks to be downloaded: 1675
 
