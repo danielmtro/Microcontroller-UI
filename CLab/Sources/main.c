@@ -88,7 +88,8 @@ void main()
     }
   }
   
-  
+  //test leds
+  ledOn();
   
   
   //poll command char
