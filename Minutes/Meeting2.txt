@@ -10,3 +10,21 @@ Things completed last week:
 - Can write to terminal 
 - Finished exercise 1
 
+Extended plan for exercise 2:
+- led command will now be turn on with a specified delay, rather than just on and off
+- 7 see command will display the sum of two numbers instead of just one number
+
+Plan for exercise 3:
+- add on to exercise 2 a command to play a tune by typing in the notes and duration (to keep the commands simpler, the tune will be kept in C major/A minor which has no sharps or flats)
+- for example C2 E2 G2 C4 would play a C major arpeggio finishing on the higher C with a note held twice as long
+- the total tune length cannot exceed the command buffer size of 100 characters (this includes spaces)
+- there should be a flag that indicates whether a tune is currently playing (or any other command from exercise 2 is currently executing), and should output to serial to inform the user not to enter new commands until the current command is finished
+- if they do enter a command while the current command is executing, there is a chance it will overwrite critical parts of the command string while it is being read for the current command (highly likely for a tune command)
+- while this could be improved by adding a new char buffer to store the tune in, so that a second tune can be queued, we might not have time to implement this
+
+Responsibilities for the weekend:
+Daniel - delay function to turn led on
+Henry - 7 seg function to add two numbers together
+Will - tune command (once delay function is written)
+
+Aim to finish these tasks by sunday 11:59pm, spend monday and tuesday cleaning up code and ensuring commenting and modularisation is good quality.
