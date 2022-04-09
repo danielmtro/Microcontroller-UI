@@ -9,6 +9,7 @@
 #define BUFFER 30
 
 interrupt 21 void serialISR();
+void run_instruction(char *instruction);
 
 
 //global variables involved in interrupt sequence
@@ -16,6 +17,8 @@ interrupt 21 void serialISR();
 
 char sentence[BUFFER];  //takes input 
 char command[BUFFER];   //stores the serial input
+
+
 int j = 0;     //keeps track of the length of command
 int exercise_1_flag = 0;
 
@@ -62,9 +65,13 @@ void main()
   
   
   //Exercise 2 demonstration
-  SerialOutputString(welcome_message, strlen(welcome_message)); 
+  SerialOutputString(welcome_message, strlen(welcome_message));
+  
+  //enable everything
+  
   
   new_command = 0;
+  
   
   
   //test speaker      - NOT WORKING ATM
@@ -74,10 +81,14 @@ void main()
   
   //test 7-seg
   
-  DDRB  = 0xFF;  //enable 7-seg
-  DDRP  = 0x3F;
-  PTP   = 0x07;
-  PORTB = 0x00;
+  while(command[0] != 'f'){
+    
+    while(new_command == 0);
+    
+    run_instruction(command);
+    
+  }
+   
   
   while(command[0] != 'f'){
     
@@ -87,10 +98,12 @@ void main()
       new_command = 0;
     }
   }
-  
+ 
   //test leds
-  ledOn();
+  //ledOn();
   
+  
+ 
   
   //poll command char
   
@@ -124,6 +137,8 @@ interrupt 21 void serialISR()
       //sets command to 1 to make sure program knows there is a new command that hasn't been read
       new_command = 1;
       
+     
+      
       //output the newline to terminal
       SerialOutputChar(0x0D);
       
@@ -132,6 +147,7 @@ interrupt 21 void serialISR()
       
       //set flag to know that exercise 1 is complete
       exercise_1_flag = 1;
+      
     } 
     
     // Store each character of sentence in buffer
@@ -161,4 +177,69 @@ interrupt 21 void serialISR()
       }
     }
   }
+}
+
+
+
+void run_instruction(char *instruction) {
+  char command = instruction[0];
+  char *error = "You have tried to use an LED command, but entered an invalid argument. This command accepts the arguments 0 or 1.";
+  char *string_out;  
+  char *error2 = "You have entered an invalid command. You can type 'H' for help on valid commands";
+  char *error_sseg = "You have tried to use an Seven Seg command, but entered an invalid argument. This command accepts the arguments integers 0-9.";
+  char led_arg;
+  int sseg_arg;
+  char *nums = "0123456789";
+  int i;
+  
+  
+  if (command == 'L') {
+    char led_arg = instruction[2];
+    if (led_arg == '0') {
+      ledOff();  
+    }
+    else if (led_arg == '1') {
+      ledOn();  
+    }
+    else {
+      SerialOutputString(error, strlen(error));
+    }
+  }
+  else if (command =='W') {
+    string_out = instruction+2;
+    SerialOutputString(string_out, strlen(string_out));
+  }
+  else if (command == 'H') {
+    print_help();
+  }
+  else if (command == 'S'){
+  
+    for(i = 0; i < 10; i++){
+      if(instruction[2] == nums[i]){
+        sseg_arg = i;
+      }
+      
+    }
+    
+    
+    if(sseg_arg >= 0) {
+      if(sseg_arg <= 9){ 
+         sevensegmodule(sseg_arg);
+      }else{
+    
+       SerialOutputString(error_sseg, strlen(error_sseg));
+      
+    } 
+    } else{
+    
+       SerialOutputString(error_sseg, strlen(error_sseg));
+      
+    }
+  }
+  else {   
+    SerialOutputString(error2, strlen(error2));
+  }
+  
+  new_command = 0;
+  
 }

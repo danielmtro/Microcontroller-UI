@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "\\Mac\Home\Documents\GitHub\Group-7\CLab\bin\Project.absHCS12_Serial_Monitor.abs"
+PROGRAM "C:\Users\Danie\OneDrive\Desktop\Uni\3rdYear\Group-7\CLab\bin\Project.absHCS12_Serial_Monitor.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -26,22 +26,22 @@ command.c.o                             Model: SMALL,         Lang: ANSI-C
 STARTUP SECTION
 ---------------------------------------------------------------------------------------------
 Entry point: 0xC029 (_Startup)
-_startupData is allocated at 0xC03B and uses 6 Bytes
+_startupData is allocated at 0xC031 and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
   _Range   pZeroOut       0x1100     68
-  _Copy    *toCopyDownBeg 0xC695
+  _Copy    *toCopyDownBeg 0xC9A0
 } _startupData;
 
 *********************************************************************************************
 SECTION-ALLOCATION SECTION
 Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
-.init                             59     R     0xC000     0xC03A   ROM_C000
-.startData                        10     R     0xC03B     0xC044   ROM_C000
-.rodata1                         168     R     0xC045     0xC0EC   ROM_C000
-.text                           1172     R     0xC0ED     0xC580   ROM_C000
-.copy                              2     R     0xC695     0xC696   ROM_C000
+.init                             49     R     0xC000     0xC030   ROM_C000
+.startData                        10     R     0xC031     0xC03A   ROM_C000
+.rodata1                         746     R     0xC03B     0xC324   ROM_C000
+.text                           1383     R     0xC325     0xC88B   ROM_C000
+.copy                              2     R     0xC9A0     0xC9A1   ROM_C000
 .stack                           256   R/W     0x1000     0x10FF   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
@@ -387,11 +387,11 @@ Section Name                    Size  Type     From       To       Segment
 .abs_section_ffd4                  2     R     0xFFD4     0xFFD5   .absSeg341
 .bss                               6   R/W     0x1100     0x1105   RAM
 .common                           62   R/W     0x1106     0x1143   RAM
-RUNTIME                          276     R     0xC581     0xC694   ROM_C000
+RUNTIME                          276     R     0xC88C     0xC99F   ROM_C000
 .vectSeg342_vect                   2     R     0xFFFE     0xFFFF   .vectSeg342
 
 Summary of section sizes per section type:
-READ_ONLY (R):         69B (dec:     1691)
+READ_ONLY (R):         9A6 (dec:     2470)
 READ_WRITE (R/W):      144 (dec:      324)
 NO_INIT (N/I):         190 (dec:      400)
 
@@ -611,7 +611,7 @@ MODULE:                 -- mc9s12dg256.c.o --
      _MODRR                                     257       1       1       0   .abs_section_257
      _PTP                                       258       1       1       2   .abs_section_258
      _PTIP                                      259       1       1       0   .abs_section_259
-     _DDRP                                      25A       1       1       1   .abs_section_25a
+     _DDRP                                      25A       1       1       2   .abs_section_25a
      _RDRP                                      25B       1       1       0   .abs_section_25b
      _PERP                                      25C       1       1       0   .abs_section_25c
      _PPSP                                      25D       1       1       0   .abs_section_25d
@@ -625,9 +625,9 @@ MODULE:                 -- mc9s12dg256.c.o --
      _PPSH                                      265       1       1       0   .abs_section_265
      _PIEH                                      266       1       1       0   .abs_section_266
      _PIFH                                      267       1       1       0   .abs_section_267
-     _PTJ                                       268       1       1       1   .abs_section_268
+     _PTJ                                       268       1       1       2   .abs_section_268
      _PTIJ                                      269       1       1       0   .abs_section_269
-     _DDRJ                                      26A       1       1       1   .abs_section_26a
+     _DDRJ                                      26A       1       1       2   .abs_section_26a
      _RDRJ                                      26B       1       1       0   .abs_section_26b
      _PERJ                                      26C       1       1       0   .abs_section_26c
      _PPSJ                                      26D       1       1       0   .abs_section_26d
@@ -690,8 +690,8 @@ MODULE:                 -- mc9s12dg256.c.o --
      _CAN4TXDSR7                                2BB       1       1       0   .abs_section_2bb
      _CAN4TXDLR                                 2BC       1       1       0   .abs_section_2bc
      _CAN4TXTBPR                                2BD       1       1       0   .abs_section_2bd
-     _PORTAB                                      0       2       2       4   .abs_section_0
-     _DDRAB                                       2       2       2       2   .abs_section_2
+     _PORTAB                                      0       2       2       5   .abs_section_0
+     _DDRAB                                       2       2       2       3   .abs_section_2
      _PARTID                                     1A       2       2       0   .abs_section_1a
      _TCNT                                       44       2       2       0   .abs_section_44
      _TC0                                        50       2       2       0   .abs_section_50
@@ -751,95 +751,108 @@ MODULE:                 -- mc9s12dg256.c.o --
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     main                                      C0ED      93     147       1   .text       
-     serialISR                                 C180      7D     125       1   .text       
+     main                                      C325      94     148       1   .text       
+     serialISR                                 C3B9      7D     125       1   .text       
+     run_instruction                           C436      98     152       1   .text       
 - VARIABLES:
-     STRING.Exercise.1.completed.1             C045      16      22       1   .rodata1    
-     STRING..Hello..To.proceed...2             C05B      64     100       1   .rodata1    
-     STRING.You.ve.exceeded.the..3             C0BF      2E      46       1   .rodata1    
+     STRING.Exercise.1.completed.1             C03B      16      22       1   .rodata1    
+     STRING..Hello..To.proceed...2             C051      64     100       1   .rodata1    
+     STRING.You.ve.exceeded.the..3             C0B5      2E      46       1   .rodata1    
+     STRING.You.have.tried.to.us.4             C0E3      72     114       1   .rodata1    
+     STRING.You.have.entered.an..5             C155      51      81       1   .rodata1    
+     STRING.You.have.tried.to.us.6             C1A6      7E     126       1   .rodata1    
+     STRING.0123456789.7                       C224       B      11       1   .rodata1    
      j                                         1100       2       2       6   .bss        
      exercise_1_flag                           1102       2       2       2   .bss        
-     new_command                               1104       2       2       4   .bss        
+     new_command                               1104       2       2       6   .bss        
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
      sentence                                  1106      1E      30       3   .common     
-     command                                   1124      1E      30       3   .common     
+     command                                   1124      1E      30       5   .common     
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
      Init                                      C000      29      41       1   .init       
-     _Startup                                  C029      12      18       0   .init       
+     _Startup                                  C029       8       8       0   .init       
 - VARIABLES:
-     _startupData                              C03B       6       6       3   .startData  
+     _startupData                              C031       6       6       3   .startData  
 - LABELS:
      __SEG_END_SSTACK                          1100       0       0       1               
 MODULE:                 -- CTYPE.C.o (ansisi.lib) --
 - PROCEDURES:
-     isdigit                                   C1FD       E      14       1   .text       
-     isspace                                   C20B      17      23       2   .text       
-     toupper                                   C222      14      20       3   .text       
+     isdigit                                   C4CE       E      14       1   .text       
+     isspace                                   C4DC      17      23       2   .text       
+     toupper                                   C4F3      14      20       3   .text       
 - VARIABLES:
 MODULE:                 -- STDLIB.C.o (ansisi.lib) --
 - PROCEDURES:
-     CheckCharWithBase                         C236      39      57       1   .text       
-     _strtoul                                  C26F     170     368       8   .text       
-     _strtol                                   C3DF      D0     208       3   .text       
-     strtol                                    C4AF      13      19       1   .text       
+     CheckCharWithBase                         C507      39      57       1   .text       
+     _strtoul                                  C540     170     368       8   .text       
+     _strtol                                   C6B0      D0     208       3   .text       
+     strtol                                    C780      13      19       1   .text       
 - VARIABLES:
 MODULE:                 -- STRING.C.o (ansisi.lib) --
 - PROCEDURES:
-     strlen                                    C4C2      14      20       2   .text       
-     strcpy                                    C4D6       D      13       1   .text       
+     strlen                                    C793      14      20       4   .text       
+     strcpy                                    C7A7       D      13       1   .text       
 - VARIABLES:
 MODULE:                 -- rtshc12.c.o (ansisi.lib) --
 - PROCEDURES:
-     _LCMP_P                                   C581      15      21       1   RUNTIME     
-     _LNEG                                     C596       D      13       2   RUNTIME     
-     _LMULS16x32                               C5A3      1F      31       1   RUNTIME     
-     _lDivMod                                  C5C2      BE     190       1   RUNTIME     
-     _LDIVU                                    C680       E      14       1   RUNTIME     
-     _ILSEXT                                   C68E       7       7       2   RUNTIME     
+     _LCMP_P                                   C88C      15      21       1   RUNTIME     
+     _LNEG                                     C8A1       D      13       2   RUNTIME     
+     _LMULS16x32                               C8AE      1F      31       1   RUNTIME     
+     _lDivMod                                  C8CD      BE     190       1   RUNTIME     
+     _LDIVU                                    C98B       E      14       1   RUNTIME     
+     _ILSEXT                                   C999       7       7       2   RUNTIME     
 - VARIABLES:
      errno                                     1142       2       2       2   .common     
 MODULE:                 -- serial.c.o --
 - PROCEDURES:
-     serialRegisters                           C4E3       E      14       1   .text       
-     SerialOutputString                        C4F1      2C      44       1   .text       
-     SerialOutputChar                          C51D       9       9       2   .text       
+     serialRegisters                           C7B4       E      14       1   .text       
+     SerialOutputString                        C7C2      2C      44       3   .text       
+     SerialOutputChar                          C7EE       9       9       2   .text       
 - VARIABLES:
 MODULE:                 -- command.c.o --
 - PROCEDURES:
-     sevensegmodule                            C526      4E      78       1   .text       
-     ledOn                                     C574       D      13       1   .text       
+     sevensegmodule                            C7F7      5D      93       2   .text       
+     ledOn                                     C854      10      16       1   .text       
+     ledOff                                    C864       E      14       1   .text       
+     print_help                                C872      1A      26       1   .text       
 - VARIABLES:
+     STRING.Hello..Here.are.the..1             C22F      53      83       1   .rodata1    
+     STRING.Type..S.X..to.change.2             C282      61      97       1   .rodata1    
+     STRING.Type.w.followed.by.a.3             C2E3      42      66       1   .rodata1    
 
 *********************************************************************************************
 MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   mc9s12dg256.c.o                            400      0      0
-  main.c.o                                    66    272    170
-  Start12.c.o                                  0     59      0
+  main.c.o                                    66    425    502
+  Start12.c.o                                  0     49      0
   CTYPE.C.o (ansisi.lib)                       0     57      0
   STDLIB.C.o (ansisi.lib)                      0    652      0
   STRING.C.o (ansisi.lib)                      0     33      0
   rtshc12.c.o (ansisi.lib)                     2    276      0
   serial.c.o                                   0     67      0
-  command.c.o                                  0     91      0
+  command.c.o                                  0    149    246
   other                                      256     12      2
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
-  main serialISR isdigit isspace toupper CheckCharWithBase _strtoul _strtol 
-  strtol strlen strcpy serialRegisters SerialOutputString SerialOutputChar 
-  sevensegmodule ledOn 
+  main serialISR run_instruction isdigit isspace toupper CheckCharWithBase 
+  _strtoul _strtol strtol strlen strcpy serialRegisters SerialOutputString 
+  SerialOutputChar sevensegmodule ledOn ledOff print_help 
 SECTION: ".bss"
   j exercise_1_flag new_command 
 SECTION: ".init"
   Init _Startup 
 SECTION: ".rodata1"
   STRING.Exercise.1.completed.1 STRING..Hello..To.proceed...2 
-  STRING.You.ve.exceeded.the..3 
+  STRING.You.ve.exceeded.the..3 STRING.You.have.tried.to.us.4 
+  STRING.You.have.entered.an..5 STRING.You.have.tried.to.us.6 
+  STRING.0123456789.7 STRING.Hello..Here.are.the..1 
+  STRING.Type..S.X..to.change.2 STRING.Type.w.followed.by.a.3 
 SECTION: ".abs_section_8"
   _PORTE 
 SECTION: ".abs_section_9"
@@ -1533,8 +1546,8 @@ SECTION: "RUNTIME"
 OBJECT LIST SORTED BY ADDRESS
      Name                                      Addr   hSize   dSize     Ref    Section   RLIB
 ---------------------------------------------------------------------------------------------
-     _PORTAB                                      0       2       2       4   .abs_section_0
-     _DDRAB                                       2       2       2       2   .abs_section_2
+     _PORTAB                                      0       2       2       5   .abs_section_0
+     _DDRAB                                       2       2       2       3   .abs_section_2
      _PORTE                                       8       1       1       0   .abs_section_8
      _DDRE                                        9       1       1       0   .abs_section_9
      _PEAR                                        A       1       1       0   .abs_section_a
@@ -1793,7 +1806,7 @@ OBJECT LIST SORTED BY ADDRESS
      _MODRR                                     257       1       1       0   .abs_section_257
      _PTP                                       258       1       1       2   .abs_section_258
      _PTIP                                      259       1       1       0   .abs_section_259
-     _DDRP                                      25A       1       1       1   .abs_section_25a
+     _DDRP                                      25A       1       1       2   .abs_section_25a
      _RDRP                                      25B       1       1       0   .abs_section_25b
      _PERP                                      25C       1       1       0   .abs_section_25c
      _PPSP                                      25D       1       1       0   .abs_section_25d
@@ -1807,9 +1820,9 @@ OBJECT LIST SORTED BY ADDRESS
      _PPSH                                      265       1       1       0   .abs_section_265
      _PIEH                                      266       1       1       0   .abs_section_266
      _PIFH                                      267       1       1       0   .abs_section_267
-     _PTJ                                       268       1       1       1   .abs_section_268
+     _PTJ                                       268       1       1       2   .abs_section_268
      _PTIJ                                      269       1       1       0   .abs_section_269
-     _DDRJ                                      26A       1       1       1   .abs_section_26a
+     _DDRJ                                      26A       1       1       2   .abs_section_26a
      _RDRJ                                      26B       1       1       0   .abs_section_26b
      _PERJ                                      26C       1       1       0   .abs_section_26c
      _PPSJ                                      26D       1       1       0   .abs_section_26d
@@ -1876,37 +1889,47 @@ OBJECT LIST SORTED BY ADDRESS
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
      j                                         1100       2       2       6   .bss        
      exercise_1_flag                           1102       2       2       2   .bss        
-     new_command                               1104       2       2       4   .bss        
+     new_command                               1104       2       2       6   .bss        
      sentence                                  1106      1E      30       3   .common     
-     command                                   1124      1E      30       3   .common     
+     command                                   1124      1E      30       5   .common     
      errno                                     1142       2       2       2   .common     
      Init                                      C000      29      41       1   .init       
-     _Startup                                  C029      12      18       0   .init       
-     STRING.Exercise.1.completed.1             C045      16      22       1   .rodata1    
-     STRING..Hello..To.proceed...2             C05B      64     100       1   .rodata1    
-     STRING.You.ve.exceeded.the..3             C0BF      2E      46       1   .rodata1    
-     main                                      C0ED      93     147       1   .text       
-     serialISR                                 C180      7D     125       1   .text       
-     isdigit                                   C1FD       E      14       1   .text       
-     isspace                                   C20B      17      23       2   .text       
-     toupper                                   C222      14      20       3   .text       
-     CheckCharWithBase                         C236      39      57       1   .text       
-     _strtoul                                  C26F     170     368       8   .text       
-     _strtol                                   C3DF      D0     208       3   .text       
-     strtol                                    C4AF      13      19       1   .text       
-     strlen                                    C4C2      14      20       2   .text       
-     strcpy                                    C4D6       D      13       1   .text       
-     serialRegisters                           C4E3       E      14       1   .text       
-     SerialOutputString                        C4F1      2C      44       1   .text       
-     SerialOutputChar                          C51D       9       9       2   .text       
-     sevensegmodule                            C526      4E      78       1   .text       
-     ledOn                                     C574       D      13       1   .text       
-     _LCMP_P                                   C581      15      21       1   RUNTIME     
-     _LNEG                                     C596       D      13       2   RUNTIME     
-     _LMULS16x32                               C5A3      1F      31       1   RUNTIME     
-     _lDivMod                                  C5C2      BE     190       1   RUNTIME     
-     _LDIVU                                    C680       E      14       1   RUNTIME     
-     _ILSEXT                                   C68E       7       7       2   RUNTIME     
+     _Startup                                  C029       8       8       0   .init       
+     STRING.Exercise.1.completed.1             C03B      16      22       1   .rodata1    
+     STRING..Hello..To.proceed...2             C051      64     100       1   .rodata1    
+     STRING.You.ve.exceeded.the..3             C0B5      2E      46       1   .rodata1    
+     STRING.You.have.tried.to.us.4             C0E3      72     114       1   .rodata1    
+     STRING.You.have.entered.an..5             C155      51      81       1   .rodata1    
+     STRING.You.have.tried.to.us.6             C1A6      7E     126       1   .rodata1    
+     STRING.0123456789.7                       C224       B      11       1   .rodata1    
+     STRING.Hello..Here.are.the..1             C22F      53      83       1   .rodata1    
+     STRING.Type..S.X..to.change.2             C282      61      97       1   .rodata1    
+     STRING.Type.w.followed.by.a.3             C2E3      42      66       1   .rodata1    
+     main                                      C325      94     148       1   .text       
+     serialISR                                 C3B9      7D     125       1   .text       
+     run_instruction                           C436      98     152       1   .text       
+     isdigit                                   C4CE       E      14       1   .text       
+     isspace                                   C4DC      17      23       2   .text       
+     toupper                                   C4F3      14      20       3   .text       
+     CheckCharWithBase                         C507      39      57       1   .text       
+     _strtoul                                  C540     170     368       8   .text       
+     _strtol                                   C6B0      D0     208       3   .text       
+     strtol                                    C780      13      19       1   .text       
+     strlen                                    C793      14      20       4   .text       
+     strcpy                                    C7A7       D      13       1   .text       
+     serialRegisters                           C7B4       E      14       1   .text       
+     SerialOutputString                        C7C2      2C      44       3   .text       
+     SerialOutputChar                          C7EE       9       9       2   .text       
+     sevensegmodule                            C7F7      5D      93       2   .text       
+     ledOn                                     C854      10      16       1   .text       
+     ledOff                                    C864       E      14       1   .text       
+     print_help                                C872      1A      26       1   .text       
+     _LCMP_P                                   C88C      15      21       1   RUNTIME     
+     _LNEG                                     C8A1       D      13       2   RUNTIME     
+     _LMULS16x32                               C8AE      1F      31       1   RUNTIME     
+     _lDivMod                                  C8CD      BE     190       1   RUNTIME     
+     _LDIVU                                    C98B       E      14       1   RUNTIME     
+     _ILSEXT                                   C999       7       7       2   RUNTIME     
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
 
 *********************************************************************************************
@@ -1931,8 +1954,6 @@ rtshc12.c.o (ansisi.lib):
   _CASE_SEARCH_8 _CASE_SEARCH_8_BYTE _FCALL _FPCMP 
 serial.c.o:
   clear_string 
-command.c.o:
-  ledOff 
 NOT USED VARIABLES
 CTYPE.C.o (ansisi.lib):
   _ctype 
@@ -1948,7 +1969,7 @@ serial.c.o:
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xC695 ---- SIZE       2 ---
+------- ROM-ADDRESS: 0xC9A0 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -1959,12 +1980,16 @@ Init                      USES _startupData
 _Startup                  USES __SEG_END_SSTACK Init main 
 main                      USES STRING.Exercise.1.completed.1 
                                 STRING..Hello..To.proceed...2 serialRegisters _TSCR1 _TSCR2 _TFLG2 
-                                exercise_1_flag new_command _DDRT _PTT _TCTL1 _DDRAB _DDRP 
-                                _PTP _PORTAB command strtol sevensegmodule ledOn 
-                                strlen SerialOutputString 
+                                exercise_1_flag new_command _DDRT _PTT _TCTL1 command 
+                                run_instruction strtol sevensegmodule strlen 
+                                SerialOutputString 
 serialISR                 USES STRING.You.ve.exceeded.the..3 strlen _SCI1SR1 
                                 _SCI1DRL j sentence command strcpy new_command 
                                 SerialOutputChar exercise_1_flag 
+run_instruction           USES STRING.You.have.tried.to.us.4 
+                                STRING.You.have.entered.an..5 STRING.You.have.tried.to.us.6 
+                                STRING.0123456789.7 ledOff ledOn print_help sevensegmodule strlen 
+                                SerialOutputString new_command 
 CheckCharWithBase         USES toupper 
 _strtoul                  USES _strtoul isspace toupper _ILSEXT _LDIVU _LCMP_P 
                                 _LMULS16x32 errno CheckCharWithBase 
@@ -1973,8 +1998,12 @@ strtol                    USES _strtol
 serialRegisters           USES _SCI1BD _SCI1CR1 _SCI1CR2 
 SerialOutputString        USES _SCI1SR1 _SCI1DRL 
 SerialOutputChar          USES _SCI1SR1 _SCI1DRL 
-sevensegmodule            USES _PORTAB _PTP 
-ledOn                     USES _DDRAB _DDRJ _PTJ _PORTAB 
+sevensegmodule            USES _PORTAB _DDRAB _DDRP _PTP 
+ledOn                     USES _DDRAB _DDRJ _PTJ _PORTAB _DDRP 
+ledOff                    USES _DDRAB _DDRJ _PTJ _PORTAB 
+print_help                USES STRING.Hello..Here.are.the..1 
+                                STRING.Type..S.X..to.change.2 STRING.Type.w.followed.by.a.3 strlen 
+                                SerialOutputString 
 _LMULS16x32               USES _LNEG 
 _LDIVU                    USES _lDivMod 
 _Vector_21                USES serialISR 
@@ -1988,6 +2017,24 @@ DEPENDENCY TREE
  |  | 
  |  +- serialRegisters     
  |  |    
+ |  +- run_instruction     
+ |  |  | 
+ |  |  +- ledOff              
+ |  |  |    
+ |  |  +- ledOn               
+ |  |  |    
+ |  |  +- print_help          
+ |  |  |  | 
+ |  |  |  +- strlen              
+ |  |  |  |    
+ |  |  |  +- SerialOutputString  
+ |  |  |       
+ |  |  +- sevensegmodule      
+ |  |  |    
+ |  |  +- strlen               (see above)
+ |  |  |  
+ |  |  +- SerialOutputString   (see above)
+ |  |     
  |  +- strtol              
  |  |  | 
  |  |  +- _strtol             
@@ -2020,14 +2067,12 @@ DEPENDENCY TREE
  |  |     |        
  |  |     +- _LNEG                (see above)
  |  |        
- |  +- sevensegmodule      
- |  |    
- |  +- ledOn               
- |  |    
- |  +- strlen              
- |  |    
- |  +- SerialOutputString  
- |       
+ |  +- sevensegmodule       (see above)
+ |  |  
+ |  +- strlen               (see above)
+ |  |  
+ |  +- SerialOutputString   (see above)
+ |     
  +- _Startup            
     | 
     +- Init                
@@ -2050,6 +2095,6 @@ STATISTIC SECTION
 
 ExeFile:
 --------
-Number of blocks to be downloaded: 5
-Total size of all blocks to be downloaded: 1691
+Number of blocks to be downloaded: 7
+Total size of all blocks to be downloaded: 2470
 

@@ -4,13 +4,6 @@
 
 
 
-
-//function that runs the instruction input
-void run_instruction(char *instruction, int length);
-
-
-
-
 //functions to execute changing the seven seg
 void sevensegmodule(int number);
 
@@ -21,6 +14,7 @@ void ledOn(void);
 void ledOff(void);
 
 
+void print_help();
 
 
 #endif

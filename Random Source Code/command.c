@@ -4,38 +4,9 @@
 #include "serial.h"
 #include <string.h>
 
-/*
-void run_instruction(char *instruction, int length) {
-  char command = instruction[0];
-  
-  if (command == 'L') {
-    char led_arg = instruction[2];
-    if (led_arg == '0') {
-      led_off();  
-    }
-    else if (led_arg == '1') {
-      led_on();  
-    }
-    else {
-      char *error = "You have tried to use an LED command, but entered an invalid argument. This command accepts the arguments 0 or 1.";
-      SerialOutputString(error, strlen(error));
-    }
-  }
-  else if (command =='W') {
-    char *string_out = instruction+2;
-    SerialOutputString(string_out, strlen(string_out));
-  }
-  else if (command == 'H') {
-    print_help();
-  }
-  else {
-    char *error = "You have entered an invalid command letter. You can enter 'H' for help on valid commands";
-    SerialOutputString(error, strlen(error));
-  }
-  
-}
 
-*/
+
+
 
 void sevensegmodule(int number){
   unsigned char SegPat[10] = {
@@ -58,6 +29,11 @@ void sevensegmodule(int number){
   0xF7          //enable fourth seven seg
   };
  
+  PORTB = 0;
+  DDRB  = 0xFF;  //enable 7-seg
+  DDRP  = 0x3F;
+  PTP   = 0x07;
+ 
  
   PORTB = 0; //sets 7-seg low
   PTP = 0x07;  //turn the secod 7-seg on
@@ -68,13 +44,18 @@ void sevensegmodule(int number){
   return;   
 }
 
+
+
 void ledOn(void)
 {
+  
   DDRB= 0xFF;   // set Port B to output 
+  
   DDRJ= 0xFF;   // set Port J to Output
   PTJ = 0x00;   // enable LEDs
 
   PORTB=0xFF;   // All LED on
+  DDRP= 0b11111111;
   
   return;
   
@@ -91,3 +72,17 @@ void ledOff(void)
   return;
   
 }
+
+void print_help(){
+  char* message = "Hello!\nHere are the following commands\nType \"L 1\" or \"L 0\" to turn LED on and off\n";
+  char* message2 = "Type \"S X\" to change the number on the seven segment display. Note X can be any number from 0-9\n";
+  char* message3 = "Type w followed by a string to display the string on the terminal";
+  
+  SerialOutputString(message, strlen(message));
+  SerialOutputString(message2, strlen(message2));
+  SerialOutputString(message3, strlen(message3));
+  
+  return;
+
+}
+
