@@ -10,6 +10,7 @@
 
 interrupt 21 void serialISR();
 void run_instruction(char *instruction);
+void death_to_hcs12();
 
 
 //global variables involved in interrupt sequence
@@ -74,17 +75,16 @@ void main()
   
   
   
-  //test speaker      - NOT WORKING ATM
-  DDRT = 0xFF;
-  PTT = 0b00100000;
-  TCTL1 = 0x04;   
-  
-  
-  
   while(command[0] != 'f'){
     
     while(new_command == 0);
     
+    //a little easter egg
+    if(strcmp(command, "kill yourself") == 0){
+      death_to_hcs12();
+    }
+    
+    //runs the instruction that is parsed
     run_instruction(command);
     
   }
@@ -260,5 +260,17 @@ void run_instruction(char *instruction) {
   }
   
   new_command = 0;
+  
+}
+
+
+//a little easter egg
+void death_to_hcs12(){
+  
+  int i;
+  
+  for(i = 0; i < 1000; i++){
+    SerialOutputString("fuck you",8);                                
+  }
   
 }
