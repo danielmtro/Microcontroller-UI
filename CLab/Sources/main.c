@@ -7,8 +7,6 @@
 
 #define BUFFER 30
 
-
-
 interrupt 21 void serialISR();
 
 
@@ -33,6 +31,25 @@ void main()
   char* completed_1 = "Exercise 1 completed!";
   char* welcome_message = "\nHello!\nTo proceed, please enter a command. If you don't know the current commands type 'H'.\nEnjoy!";
    
+
+    // Disable all interrupts
+	asm("sei");
+	
+	// Enable timer and fast flag clear
+	TSCR1 = 0x90; 
+	
+	// Set prescaler to 8
+	TSCR2 = 0x03;
+	
+	// Choose output compare for channel 5
+	TIOS = 0x20;
+	
+	// Toggle upon successful output compare 
+	TCTL1 = 0x04; 
+
+  // Enable interrupts for timer 5
+	TIE = 0x20;
+	
   
   serialRegisters();
   EnableInterrupts;
@@ -54,7 +71,9 @@ void main()
   
   //test 7-seg
   
-  DDRB = 0xFF;  //enable 7-seg
+  DDRB  = 0xFF;  //enable 7-seg
+  DDRP  = 0x3F;
+  PTP   = 0x01;
   PORTB = 0x00;
   
   while(command[0] != 'f'){
