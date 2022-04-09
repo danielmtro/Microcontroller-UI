@@ -9,6 +9,7 @@ Things completed last week:
 - Can read in input
 - Can write to terminal 
 - Finished exercise 1
+- Wrote fixed delay function
 
 Extended plan for exercise 2:
 - led command will now be turn on with a specified delay, rather than just on and off
@@ -23,8 +24,8 @@ Plan for exercise 3:
 - while this could be improved by adding a new char buffer to store the tune in, so that a second tune can be queued, we might not have time to implement this
 
 Responsibilities for the weekend:
-Daniel - delay function to turn led on
+Daniel - led on with variable delay
 Henry - 7 seg function to add two numbers together
-Will - tune command (once delay function is written)
+Will - interface function for accessing commands, tune command (once variable delay is written)
 
 Aim to finish these tasks by sunday 11:59pm, spend monday and tuesday cleaning up code and ensuring commenting and modularisation is good quality.
