@@ -17,4 +17,8 @@ void ledOff(void);
 void print_help();
 
 
+//turns the LED on for a fixed number of seconds specified in the argument
+void timedLED(int time);
+
+
 #endif

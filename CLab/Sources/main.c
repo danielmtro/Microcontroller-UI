@@ -79,7 +79,7 @@ void main()
   PTT = 0b00100000;
   TCTL1 = 0x04;   
   
-  //test 7-seg
+  
   
   while(command[0] != 'f'){
     
@@ -90,7 +90,7 @@ void main()
   }
    
   
-  while(command[0] != 'f'){
+  while(command[0] != 'F'){
     
     if(new_command == 1 ) {
       number = atoi(command);
@@ -136,7 +136,6 @@ interrupt 21 void serialISR()
       
       //sets command to 1 to make sure program knows there is a new command that hasn't been read
       new_command = 1;
-      
      
       
       //output the newline to terminal
@@ -187,7 +186,7 @@ void run_instruction(char *instruction) {
   char *string_out;  
   char *error2 = "You have entered an invalid command. You can type 'H' for help on valid commands";
   char *error_sseg = "You have tried to use an Seven Seg command, but entered an invalid argument. This command accepts the arguments integers 0-9.";
-  char led_arg;
+  char *error_time = "You have tried to use a LED timed command but entered an invalid argument.This command accepts the arguments integers 0-9.";
   int sseg_arg;
   char *nums = "0123456789";
   int i;
@@ -235,6 +234,26 @@ void run_instruction(char *instruction) {
        SerialOutputString(error_sseg, strlen(error_sseg));
       
     }
+  } else if (command == 'F'){
+       ledOff();
+       SerialOutputString("exiting...", 10);
+  } else if (command == 'T'){
+    
+    sseg_arg = -1;
+    for(i = 0; i < 10; i++){
+      if(instruction[2] == nums[i]){         //use the seven seg arg for this as well cos im lazy
+        sseg_arg = i;
+      }
+    }
+    
+    if(sseg_arg == -1){
+      
+      SerialOutputString(error_time, strlen(error_time));
+    } else{
+    
+      timedLED(sseg_arg);
+    }
+      
   }
   else {   
     SerialOutputString(error2, strlen(error2));
