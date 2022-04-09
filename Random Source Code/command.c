@@ -31,7 +31,7 @@ void sevensegmodule(int number){
  
   PORTB = 0;
   DDRB  = 0xFF;  //enable 7-seg
-  DDRP  = 0x3F;
+  DDRP  = 0x3F;  //Select which digit will be used
   PTP   = 0x07;
  
  
@@ -49,8 +49,7 @@ void sevensegmodule(int number){
 void ledOn(void)
 {
   
-  DDRB= 0xFF;   // set Port B to output 
-  
+  PTP = 0xFF;
   DDRJ= 0xFF;   // set Port J to Output
   PTJ = 0x00;   // enable LEDs
 
