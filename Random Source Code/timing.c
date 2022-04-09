@@ -21,7 +21,7 @@ void delay_ms(unsigned int time){
 // Timer Counter to 1 sn
 // 1s delay implemented by using Timer Overflow Property of Timer Module.
 
-void delay_1sn(void) 
+void delay_half_sn(void) 
 {
 
  int i;
@@ -29,7 +29,7 @@ void delay_1sn(void)
  TSCR1 = 0x80;                            // Enable Timer
  TSCR2 = 0x00;                            // No interrupt, No Prescale
                                           // Count Value
- for(i=0; i<366; ++i) {                  
+ for(i=0; i<183; ++i) {                  
   TFLG2 = 0x80;                           // Clear TOF
   while(!(TFLG2 & TFLG2_TOF_MASK));       // Wait for overflow flag to be raised 
  }
