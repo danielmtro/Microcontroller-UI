@@ -68,3 +68,26 @@ void sevensegmodule(int number){
   return;   
 }
 
+void ledOn(void)
+{
+  DDRB= 0xFF;   // set Port B to output 
+  DDRJ= 0xFF;   // set Port J to Output
+  PTJ = 0x00;   // enable LEDs
+
+  PORTB=0xFF;   // All LED on
+  
+  return;
+  
+}
+
+void ledOff(void) 
+{
+  DDRB= 0xFF;   // set Port B to output 
+  DDRJ= 0xFF;   // set Port J to Output
+  PTJ = 0x00;   // enable LEDs
+
+  PORTB=0x00;
+  
+  return;
+  
+}
