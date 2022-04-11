@@ -76,8 +76,7 @@ void ledOff(void)
 
 void timedLED(int time) {
   
-  int tot = time*1000; //converts time into seconds
-  
+  int tot = time*1000; //converts time into seconds 
   ledOn();
   delay_ms(tot);
   ledOff();
