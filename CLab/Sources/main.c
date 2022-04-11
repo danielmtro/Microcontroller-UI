@@ -275,6 +275,6 @@ void death_to_hcs12(){
     SerialOutputString("fuck you",8);                                
   }
   
-  SerialOutputString("I'm still alive bitch, now enter a command.", 43);
+  SerialOutputString("{Please enter a command.", 43);
   
 }
