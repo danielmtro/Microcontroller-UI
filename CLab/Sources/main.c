@@ -52,39 +52,44 @@
 #define semiquav  1
 
 
-unsigned int note[] = {rest,
-    Eb3,
-    E3,
-    F3,
-    Gb3,
-    G3,
-    Ab3,
-    A3,
-    Bb3,
-    B3,
-    C4,
-    Db4,
-    D4,
-    Eb4,
-    E4,
-    F4,
-    Gb4,
-    G4,
-    Ab4,
-    A4,
-    Bb4,
-    B4,
-    C5,
-    Db5,
-    D5,
-    Eb5,
-    E5,
-    F5,
-    Gb5,
-    G5,
-    Ab5
+                                    //index's 
+                                    
+unsigned int note[] = {rest,        //0
+    Eb3,                            //1
+    E3,                             //2
+    F3,                             //3
+    Gb3,                            //4
+    G3,                             //5
+    Ab3,                            //6
+    A3,                             //7
+    Bb3,                            //8
+    B3,                             //9
+    C4,                             //10
+    Db4,                            //11
+    D4,                             //12
+    Eb4,                            //13
+    E4,                             //14
+    F4,                             //15
+    Gb4,                            //16
+    G4,                             //17
+    Ab4,                            //18
+    A4,                             //19
+    Bb4,                            //20
+    B4,                             //21
+    C5,                             //22
+    Db5,                            //23
+    D5,                             //24
+    Eb5,                            //25
+    E5,                             //26
+    F5,                             //27
+    Gb5,                            //28
+    G5,                             //29
+    Ab5                             //30
     };
 
+                                                
+int mii_song_notes[] = {16, 19, 23, 19, 16, 12, 0, 12, 0, 12, 0, 16, 19, 23, 0, 19, 16, 26, 25, 24};  //20
+int mii_song_duration[] = {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 7, 6, 6, 5, 6, 6};
 
 //most songs play at 120 bpm
 //2 beats per second
@@ -111,6 +116,7 @@ interrupt 13 void speakerISR();
 void run_instruction(char *instruction);
 void death_to_hcs12();
 void play_note(int note_num, int duration_num);
+void play_mii();
 
 //variable for the period of the note being played
 volatile int period = 1000000;
@@ -133,7 +139,7 @@ int new_command = 0;
 void main() 
 {
   int number;
-  int i;
+  
   
   //strings to be used in program
   char* completed_1 = "Exercise 1 completed!";
@@ -164,7 +170,7 @@ void main()
   
   
   //testing speaker function
-  play_note(0, 3);
+  play_mii();
   
   
   //Exercise 2 demonstration
@@ -405,6 +411,19 @@ void play_note(int note_num, int duration_num) {
   
 }
 
+
+void play_mii() {
+int i;
+
+
+for(i = 0; i < 20; i++) {
+  
+  play_note(mii_song_notes[i], mii_song_duration[i]);
+    
+}
+return;
+
+}
 
 
 //a little easter egg
