@@ -12,6 +12,8 @@ interrupt 21 void serialISR();
 void run_instruction(char *instruction);
 void death_to_hcs12();
 
+volatile int period = 100000000;
+
 
 //global variables involved in interrupt sequence
 
@@ -44,14 +46,28 @@ void main()
 	//enable serial input and output
 	serialRegisters();
 	
-	// Enable timer 
-	TSCR1 = TSCR1_TEN;
+	// Enable timer and fast flag clear
+	TSCR1 = 0x90;
 	
 	// Set prescaler to 8
 	TSCR2 = 0x03;
 	
+	TSCR2 = 0b00000111;
+	
 	//reset overflow flag
 	TFLG2 =  TFLG2_TOF;
+	
+	//enable output compare on pin 5
+	TIOS = 0x20;
+	
+	//toggle on successful output compare
+	TCTL1 = 0x04;
+	
+	//set first output compare to happen 
+	TC5 = TCNT + period;
+	
+	//enable interrupts on timer 5
+	TIE = 0x20;
 	
 	
   EnableInterrupts;
@@ -75,14 +91,14 @@ void main()
   
   
   
-  while(command[0] != 'f'){
+  while(command[0] != 'F'){
     
     while(new_command == 0);
     
     //a little easter egg
     if(strcmp(command, "kill yourself") == 0){
       death_to_hcs12();
-      new_command = 0;
+      
       continue;
     }
     
@@ -180,6 +196,14 @@ interrupt 21 void serialISR()
   }
 }
 
+interrupt 13 void speakerISR() {
+
+TCNT = 0;
+TC5 = TCNT + period;
+
+SerialOutputString("hi", 2);
+
+}
 
 
 void run_instruction(char *instruction) {
@@ -270,6 +294,7 @@ void run_instruction(char *instruction) {
 void death_to_hcs12(){
   
   int i;
+  new_command = 0;
   
   for(i = 0; i < 100; i++){
     SerialOutputString("fuck you",8);                                
