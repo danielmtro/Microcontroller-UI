@@ -374,6 +374,7 @@ void run_instruction(char *instruction) {
 void play_song(int note_num, int duration_num) {
   
   int time = duration[duration_num]*125;
+  period = note[note_num];
   
   //enable timer interrupts
   TIE = 0x20;
@@ -381,10 +382,10 @@ void play_song(int note_num, int duration_num) {
   //set first output compare to happen 
 	TC5 = TCNT + period;
   
-  period = note[note_num];
+  //wait the duration of the note
   delay_ms(time);
   
-  //disable timer interrupts
+  //disable timer interrupts (stop the speaker from playing anything else)
   TIE = 0x00;
   
 }
