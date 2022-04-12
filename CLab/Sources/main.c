@@ -280,8 +280,7 @@ interrupt 21 void serialISR()
 
 interrupt 13 void speakerISR() {
 
-TCNT = 0;
-TC5 = TCNT + period;
+TC5 = TC5 + period;
 
 }
 
