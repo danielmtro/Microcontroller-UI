@@ -26,8 +26,5 @@ void setup_timers(){
 	//enable output compare on pin 5
 	TIOS = 0x20;
 	
-	//toggle on successful output compare
-	TCTL1 = 0x04;
-	
 	return;
 }

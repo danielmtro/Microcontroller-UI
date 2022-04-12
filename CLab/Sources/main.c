@@ -110,10 +110,10 @@ interrupt 21 void serialISR();
 interrupt 13 void speakerISR();
 void run_instruction(char *instruction);
 void death_to_hcs12();
-void play_song(int note_num, int duration_num);
+void play_note(int note_num, int duration_num);
 
 //variable for the period of the note being played
-volatile int period = 20;
+volatile int period = 1000000;
 
 
 //global variables involved in interrupt sequence
@@ -132,9 +132,8 @@ int new_command = 0;
 
 void main() 
 {
-  //variables used in 7-seg testing
   int number;
-  int i = 0;
+  int i;
   
   //strings to be used in program
   char* completed_1 = "Exercise 1 completed!";
@@ -161,6 +160,11 @@ void main()
   }
   
   SerialOutputString(completed_1, strlen(completed_1));
+  
+  
+  
+  //testing speaker function
+  play_note(0, 3);
   
   
   //Exercise 2 demonstration
@@ -280,7 +284,7 @@ interrupt 21 void serialISR()
 
 interrupt 13 void speakerISR() {
 
-TC5 = TC5 + period;
+  TC5 = TC5 + period;
 
 }
 
@@ -371,10 +375,18 @@ void run_instruction(char *instruction) {
 
 
 
-void play_song(int note_num, int duration_num) {
+//this function plays a note based on two inputs
+//1st input: index of note in note array defined above
+//2nd input: index of duration in duration array defined above.
+
+//no outputs - just plays the note for the desired duration
+void play_note(int note_num, int duration_num) {
   
   int time = duration[duration_num]*125;
   period = note[note_num];
+  
+  //toggle on successful output compare
+	TCTL1 = 0x04;
   
   //enable timer interrupts
   TIE = 0x20;
@@ -384,6 +396,9 @@ void play_song(int note_num, int duration_num) {
   
   //wait the duration of the note
   delay_ms(time);
+  
+  //set to low
+  TCTL1 = 0x00;
   
   //disable timer interrupts (stop the speaker from playing anything else)
   TIE = 0x00;
@@ -402,7 +417,7 @@ void death_to_hcs12(){
     SerialOutputString("fuck you",8);                                
   }
   
-  SerialOutputString("{Please enter a command.", 43);
+  SerialOutputString("Please enter a command", 22);
   
 }
 
