@@ -12,8 +12,10 @@ void ledOn(void);
 void ledOff(void);
 
 //prints the help function
-void print_help();
+void print_help(void);
 
+// converts the string of notes to arrays that can be passed to the play_song function
+void command_to_tune(char *command, int *notes, int *durations);
 
 //turns the LED on for a fixed number of seconds specified in the argument
 void timedLED(int time);

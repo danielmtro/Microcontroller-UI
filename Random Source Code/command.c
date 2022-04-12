@@ -181,14 +181,15 @@ void command_to_tune(char *command, int *notes, int *durations) {
         i++;
     }
     tune_duration = tune_duration / 8; // semiquavers to seconds
-    itoa(tune_duration, tune_dur, 10);
+    //itoa(tune_duration, tune_dur, 10);  itoa not included in code warriors
+    tune_dur[0] = tune_duration + '0';
     SerialOutputString(playing_mssg1, strlen(playing_mssg1));
     SerialOutputString(&tune_dur[0], strlen(&tune_dur[0]));
     SerialOutputString(playing_mssg2, strlen(playing_mssg2));
 }
 
 
-void print_help(){
+void print_help(void){
   char* message = "Hello!\nHere are the following commands\n\nType \"L 1\" or \"L 0\" to turn LED on and off\n";
   char* message2 = "Type \"S X\" to change the number on the seven segment display. Note X can be any number from 0-9\n";
   char* message3 = "Type T followed by an integer from 1-9 to turn the LED's on for a set number of seconds.\n";

@@ -9,6 +9,6 @@ void delay_ms(unsigned int time);
 
 
 //sets up the timers for the program
-void setup_timers();
+void setup_timers(void);
 
 #endif

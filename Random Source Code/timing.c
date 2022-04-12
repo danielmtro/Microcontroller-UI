@@ -13,7 +13,7 @@ void delay_ms(unsigned int time){
 }
 
 
-void setup_timers(){
+void setup_timers(void){
   
   // Enable timer and fast flag clear
 	TSCR1 = 0x90;

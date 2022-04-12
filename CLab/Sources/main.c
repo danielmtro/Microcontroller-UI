@@ -115,12 +115,13 @@ unsigned int duration[] =
 interrupt 21 void serialISR();
 interrupt 13 void speakerISR();
 void run_instruction(char *instruction);
-void death_to_hcs12();
+void death_to_hcs12(void);
 void play_note(int note_num, int duration_num);
-void play_mii();
+void play_song(int *notes, int *durations);
+void play_mii(void);
 
 //variable for the period of the note being played
-volatile int period = 1000000;
+volatile int period = 1000;
 
 
 //global variables involved in interrupt sequence
@@ -421,12 +422,12 @@ void play_note(int note_num, int duration_num) {
 void play_song(int *notes, int *durations) {
   int i = 0;
   while (notes[i] != -1) {
-    play_note(notes[i], durations[i])
+    play_note(notes[i], durations[i]);
     i++;
   }
 }
 
-void play_mii() {
+void play_mii(void) {
 int i;
 
 
@@ -441,7 +442,7 @@ return;
 
 
 //a little easter egg
-void death_to_hcs12(){
+void death_to_hcs12(void){
   
   int i;
   new_command = 0;
