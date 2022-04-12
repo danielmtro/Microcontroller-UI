@@ -8,11 +8,112 @@
 
 #define BUFFER 30
 
+#define rest 20
+#define Eb3 9641
+#define E3  9100
+#define F3  8589
+#define Gb3 8107
+#define G3  7652
+#define Ab3 7223
+#define A3  6817
+#define Bb3 6434
+#define B3  6073
+#define C4  5733
+#define Db4 5411
+#define D4  5107
+#define Eb4 4820
+#define E4  4550
+#define F4  4294
+#define Gb4 4053
+#define G4  3826
+#define Ab4 3611
+#define A4  3408
+#define Bb4 3611
+#define B4  3036
+#define C5  2866
+#define Db5 2705
+#define D5  2553
+#define Eb5 2410
+#define E5  2275
+#define F5  2147
+#define Gb5 2026
+#define G5  1913
+#define Ab5 1805
+#define A5  1704
+
+
+#define longnote  128      
+#define dbreve    64
+#define breve     32
+#define semibreve 16
+#define minim     8
+#define crotchet  4
+#define quaver    2
+#define semiquav  1
+
+
+unsigned int note[] = {rest,
+    Eb3,
+    E3,
+    F3,
+    Gb3,
+    G3,
+    Ab3,
+    A3,
+    Bb3,
+    B3,
+    C4,
+    Db4,
+    D4,
+    Eb4,
+    E4,
+    F4,
+    Gb4,
+    G4,
+    Ab4,
+    A4,
+    Bb4,
+    B4,
+    C5,
+    Db5,
+    D5,
+    Eb5,
+    E5,
+    F5,
+    Gb5,
+    G5,
+    Ab5
+    };
+
+
+//most songs play at 120 bpm
+//2 beats per second
+
+//usually a crotchet is 1 beat but in this case it is 4. Consider each duration unit to be
+//0.125 seconds
+
+unsigned int duration[] =
+{
+    longnote,
+    dbreve,
+    breve,
+    semibreve,
+    minim,
+    crotchet, 
+    quaver,
+    semiquav
+};
+
+
+//functions here
 interrupt 21 void serialISR();
+interrupt 13 void speakerISR();
 void run_instruction(char *instruction);
 void death_to_hcs12();
+void play_song(int note_num, int duration_num);
 
-volatile int period = 100000000;
+//variable for the period of the note being played
+volatile int period = 20;
 
 
 //global variables involved in interrupt sequence
@@ -46,28 +147,9 @@ void main()
 	//enable serial input and output
 	serialRegisters();
 	
-	// Enable timer and fast flag clear
-	TSCR1 = 0x90;
 	
-	// Set prescaler to 8
-	TSCR2 = 0x03;
-	
-	TSCR2 = 0b00000111;
-	
-	//reset overflow flag
-	TFLG2 =  TFLG2_TOF;
-	
-	//enable output compare on pin 5
-	TIOS = 0x20;
-	
-	//toggle on successful output compare
-	TCTL1 = 0x04;
-	
-	//set first output compare to happen 
-	TC5 = TCNT + period;
-	
-	//enable interrupts on timer 5
-	TIE = 0x20;
+	//setup timer for prescaler of 8, output compare on TC5 and toggling of speaker. NO interrupts enabled.
+	setup_timers();
 	
 	
   EnableInterrupts;
@@ -201,8 +283,6 @@ interrupt 13 void speakerISR() {
 TCNT = 0;
 TC5 = TCNT + period;
 
-SerialOutputString("hi", 2);
-
 }
 
 
@@ -290,6 +370,28 @@ void run_instruction(char *instruction) {
 }
 
 
+
+
+void play_song(int note_num, int duration_num) {
+  
+  int time = duration[duration_num]*125;
+  
+  //enable timer interrupts
+  TIE = 0x20;
+  
+  //set first output compare to happen 
+	TC5 = TCNT + period;
+  
+  period = note[note_num];
+  delay_ms(time);
+  
+  //disable timer interrupts
+  TIE = 0x00;
+  
+}
+
+
+
 //a little easter egg
 void death_to_hcs12(){
   
@@ -303,3 +405,5 @@ void death_to_hcs12(){
   SerialOutputString("{Please enter a command.", 43);
   
 }
+
+

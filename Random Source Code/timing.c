@@ -12,3 +12,22 @@ void delay_ms(unsigned int time){
   return;
 }
 
+
+void setup_timers(){
+  
+  // Enable timer and fast flag clear
+	TSCR1 = 0x90;
+	
+	// Set prescaler to 8
+	TSCR2 = 0x03;
+	
+	//TSCR2 = 0b00000111;
+	
+	//enable output compare on pin 5
+	TIOS = 0x20;
+	
+	//toggle on successful output compare
+	TCTL1 = 0x04;
+	
+	return;
+}

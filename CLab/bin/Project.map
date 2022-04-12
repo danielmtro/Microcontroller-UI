@@ -31,7 +31,7 @@ _startupData is allocated at 0xC031 and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
   _Range   pZeroOut       0x1100     70
-  _Copy    *toCopyDownBeg 0xCBBA
+  _Copy    *toCopyDownBeg 0xCB96
 } _startupData;
 
 *********************************************************************************************
@@ -40,9 +40,9 @@ Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
 .init                             49     R     0xC000     0xC030   ROM_C000
 .startData                        10     R     0xC031     0xC03A   ROM_C000
-.rodata1                        1042     R     0xC03B     0xC44C   ROM_C000
-.text                           1625     R     0xC44D     0xCAA5   ROM_C000
-.copy                              7     R     0xCBBA     0xCBC0   ROM_C000
+.rodata1                        1039     R     0xC03B     0xC449   ROM_C000
+.text                           1592     R     0xC44A     0xCA81   ROM_C000
+.copy                              7     R     0xCB96     0xCB9C   ROM_C000
 .stack                           256   R/W     0x1000     0x10FF   RAM
 .data                              2   R/W     0x1100     0x1101   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
@@ -390,11 +390,11 @@ Section Name                    Size  Type     From       To       Segment
 .abs_section_ffe4                  2     R     0xFFE4     0xFFE5   .absSeg342
 .bss                               6   R/W     0x1102     0x1107   RAM
 .common                           62   R/W     0x1108     0x1145   RAM
-RUNTIME                          276     R     0xCAA6     0xCBB9   ROM_C000
+RUNTIME                          276     R     0xCA82     0xCB95   ROM_C000
 .vectSeg343_vect                   2     R     0xFFFE     0xFFFF   .vectSeg343
 
 Summary of section sizes per section type:
-READ_ONLY (R):         BC7 (dec:     3015)
+READ_ONLY (R):         BA3 (dec:     2979)
 READ_WRITE (R/W):      146 (dec:      326)
 NO_INIT (N/I):         190 (dec:      400)
 
@@ -458,10 +458,10 @@ MODULE:                 -- mc9s12dg256.c.o --
      _TCTL2                                      49       1       1       0   .abs_section_49
      _TCTL3                                      4A       1       1       0   .abs_section_4a
      _TCTL4                                      4B       1       1       0   .abs_section_4b
-     _TIE                                        4C       1       1       1   .abs_section_4c
-     _TSCR2                                      4D       1       1       2   .abs_section_4d
+     _TIE                                        4C       1       1       0   .abs_section_4c
+     _TSCR2                                      4D       1       1       1   .abs_section_4d
      _TFLG1                                      4E       1       1       0   .abs_section_4e
-     _TFLG2                                      4F       1       1       2   .abs_section_4f
+     _TFLG2                                      4F       1       1       0   .abs_section_4f
      _PACTL                                      60       1       1       0   .abs_section_60
      _PAFLG                                      61       1       1       0   .abs_section_61
      _MCCTL                                      66       1       1       0   .abs_section_66
@@ -696,13 +696,13 @@ MODULE:                 -- mc9s12dg256.c.o --
      _PORTAB                                      0       2       2       5   .abs_section_0
      _DDRAB                                       2       2       2       3   .abs_section_2
      _PARTID                                     1A       2       2       0   .abs_section_1a
-     _TCNT                                       44       2       2       3   .abs_section_44
+     _TCNT                                       44       2       2       2   .abs_section_44
      _TC0                                        50       2       2       0   .abs_section_50
      _TC1                                        52       2       2       0   .abs_section_52
      _TC2                                        54       2       2       0   .abs_section_54
      _TC3                                        56       2       2       0   .abs_section_56
      _TC4                                        58       2       2       0   .abs_section_58
-     _TC5                                        5A       2       2       2   .abs_section_5a
+     _TC5                                        5A       2       2       1   .abs_section_5a
      _TC6                                        5C       2       2       0   .abs_section_5c
      _TC7                                        5E       2       2       0   .abs_section_5e
      _PACN32                                     62       2       2       0   .abs_section_62
@@ -754,26 +754,25 @@ MODULE:                 -- mc9s12dg256.c.o --
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     main                                      C44D      AB     171       1   .text       
-     serialISR                                 C4F8      7D     125       1   .text       
-     speakerISR                                C575      17      23       1   .text       
-     run_instruction                           C58C      E1     225       1   .text       
-     death_to_hcs12                            C66D      29      41       1   .text       
+     main                                      C44A      87     135       1   .text       
+     serialISR                                 C4D1      7D     125       1   .text       
+     speakerISR                                C54E       C      12       1   .text       
+     run_instruction                           C55A      E1     225       1   .text       
+     death_to_hcs12                            C63B      29      41       1   .text       
 - VARIABLES:
      STRING.Exercise.1.completed.1             C03B      16      22       1   .rodata1    
      STRING..Hello..To.proceed...2             C051      64     100       1   .rodata1    
      STRING.kill.yourself.3                    C0B5       E      14       1   .rodata1    
      STRING.You.ve.exceeded.the..4             C0C3      2E      46       1   .rodata1    
-     STRING.hi.5                               C0F1       3       3       1   .rodata1    
-     STRING.You.have.tried.to.us.6             C0F4      72     114       1   .rodata1    
-     STRING.You.have.entered.an..7             C166      51      81       1   .rodata1    
-     STRING.You.have.tried.to.us.8             C1B7      7E     126       1   .rodata1    
-     STRING.You.have.tried.to.us.9             C235      7B     123       1   .rodata1    
-     STRING.0123456789.10                      C2B0       B      11       1   .rodata1    
-     STRING.exiting....11                      C2BB       B      11       1   .rodata1    
-     STRING.fuck.you.12                        C2C6       9       9       1   .rodata1    
-     STRING..Please.enter.a.comm.13            C2CF      19      25       1   .rodata1    
-     period                                    1100       2       2       2   .data       
+     STRING.You.have.tried.to.us.5             C0F1      72     114       1   .rodata1    
+     STRING.You.have.entered.an..6             C163      51      81       1   .rodata1    
+     STRING.You.have.tried.to.us.7             C1B4      7E     126       1   .rodata1    
+     STRING.You.have.tried.to.us.8             C232      7B     123       1   .rodata1    
+     STRING.0123456789.9                       C2AD       B      11       1   .rodata1    
+     STRING.exiting....10                      C2B8       B      11       1   .rodata1    
+     STRING.fuck.you.11                        C2C3       9       9       1   .rodata1    
+     STRING..Please.enter.a.comm.12            C2CC      19      25       1   .rodata1    
+     period                                    1100       2       2       1   .data       
      j                                         1102       2       2       6   .bss        
      exercise_1_flag                           1104       2       2       2   .bss        
      new_command                               1106       2       2       7   .bss        
@@ -791,54 +790,55 @@ MODULE:                 -- Start12.c.o --
      __SEG_END_SSTACK                          1100       0       0       1               
 MODULE:                 -- CTYPE.C.o (ansisi.lib) --
 - PROCEDURES:
-     isdigit                                   C696       E      14       1   .text       
-     isspace                                   C6A4      17      23       2   .text       
-     toupper                                   C6BB      14      20       3   .text       
+     isdigit                                   C664       E      14       1   .text       
+     isspace                                   C672      17      23       2   .text       
+     toupper                                   C689      14      20       3   .text       
 - VARIABLES:
 MODULE:                 -- STDLIB.C.o (ansisi.lib) --
 - PROCEDURES:
-     CheckCharWithBase                         C6CF      39      57       1   .text       
-     _strtoul                                  C708     170     368       8   .text       
-     _strtol                                   C878      D0     208       3   .text       
-     strtol                                    C948      13      19       1   .text       
+     CheckCharWithBase                         C69D      39      57       1   .text       
+     _strtoul                                  C6D6     170     368       8   .text       
+     _strtol                                   C846      D0     208       3   .text       
+     strtol                                    C916      13      19       1   .text       
 - VARIABLES:
 MODULE:                 -- STRING.C.o (ansisi.lib) --
 - PROCEDURES:
-     strlen                                    C95B      14      20       4   .text       
-     strcpy                                    C96F       D      13       1   .text       
-     strcmp                                    C97C      19      25       1   .text       
+     strlen                                    C929      14      20       4   .text       
+     strcpy                                    C93D       D      13       1   .text       
+     strcmp                                    C94A      19      25       1   .text       
 - VARIABLES:
 MODULE:                 -- rtshc12.c.o (ansisi.lib) --
 - PROCEDURES:
-     _LCMP_P                                   CAA6      15      21       1   RUNTIME     
-     _LNEG                                     CABB       D      13       2   RUNTIME     
-     _LMULS16x32                               CAC8      1F      31       1   RUNTIME     
-     _lDivMod                                  CAE7      BE     190       1   RUNTIME     
-     _LDIVU                                    CBA5       E      14       1   RUNTIME     
-     _ILSEXT                                   CBB3       7       7       2   RUNTIME     
+     _LCMP_P                                   CA82      15      21       1   RUNTIME     
+     _LNEG                                     CA97       D      13       2   RUNTIME     
+     _LMULS16x32                               CAA4      1F      31       1   RUNTIME     
+     _lDivMod                                  CAC3      BE     190       1   RUNTIME     
+     _LDIVU                                    CB81       E      14       1   RUNTIME     
+     _ILSEXT                                   CB8F       7       7       2   RUNTIME     
 - VARIABLES:
      errno                                     1144       2       2       2   .common     
 MODULE:                 -- serial.c.o --
 - PROCEDURES:
-     serialRegisters                           C995       E      14       1   .text       
-     SerialOutputString                        C9A3      2C      44       6   .text       
-     SerialOutputChar                          C9CF       9       9       2   .text       
+     serialRegisters                           C963       E      14       1   .text       
+     SerialOutputString                        C971      2C      44       5   .text       
+     SerialOutputChar                          C99D       9       9       2   .text       
 - VARIABLES:
 MODULE:                 -- command.c.o --
 - PROCEDURES:
-     sevensegmodule                            C9D8      5D      93       2   .text       
-     ledOn                                     CA35      13      19       2   .text       
-     ledOff                                    CA48       E      14       3   .text       
-     timedLED                                  CA56      12      18       1   .text       
-     print_help                                CA68      1F      31       1   .text       
+     sevensegmodule                            C9A6      5D      93       2   .text       
+     ledOn                                     CA03      13      19       2   .text       
+     ledOff                                    CA16       E      14       3   .text       
+     timedLED                                  CA24      12      18       1   .text       
+     print_help                                CA36      1F      31       1   .text       
 - VARIABLES:
-     STRING.Hello..Here.are.the..1             C2E8      54      84       1   .rodata1    
-     STRING.Type..S.X..to.change.2             C33C      61      97       1   .rodata1    
-     STRING.Type.T.followed.by.a.3             C39D      5A      90       1   .rodata1    
-     STRING.Type.W.followed.by.a.4             C3F7      56      86       1   .rodata1    
+     STRING.Hello..Here.are.the..1             C2E5      54      84       1   .rodata1    
+     STRING.Type..S.X..to.change.2             C339      61      97       1   .rodata1    
+     STRING.Type.T.followed.by.a.3             C39A      5A      90       1   .rodata1    
+     STRING.Type.W.followed.by.a.4             C3F4      56      86       1   .rodata1    
 MODULE:                 -- timing.c.o --
 - PROCEDURES:
-     delay_ms                                  CA87      1F      31       1   .text       
+     delay_ms                                  CA55      1F      31       1   .text       
+     setup_timers                              CA74       E      14       1   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -846,7 +846,7 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   mc9s12dg256.c.o                            400      0      0
-  main.c.o                                    68    585    689
+  main.c.o                                    68    538    686
   Start12.c.o                                  0     49      0
   CTYPE.C.o (ansisi.lib)                       0     57      0
   STDLIB.C.o (ansisi.lib)                      0    652      0
@@ -854,7 +854,7 @@ MODULE STATISTIC
   rtshc12.c.o (ansisi.lib)                     2    276      0
   serial.c.o                                   0     67      0
   command.c.o                                  0    175    357
-  timing.c.o                                   0     31      0
+  timing.c.o                                   0     45      0
   other                                      256     12      7
 
 *********************************************************************************************
@@ -864,7 +864,7 @@ SECTION: ".text"
   main serialISR speakerISR run_instruction death_to_hcs12 isdigit isspace 
   toupper CheckCharWithBase _strtoul _strtol strtol strlen strcpy strcmp 
   serialRegisters SerialOutputString SerialOutputChar sevensegmodule ledOn 
-  ledOff timedLED print_help delay_ms 
+  ledOff timedLED print_help delay_ms setup_timers 
 SECTION: ".data"
   period 
 SECTION: ".bss"
@@ -873,11 +873,11 @@ SECTION: ".init"
   Init _Startup 
 SECTION: ".rodata1"
   STRING.Exercise.1.completed.1 STRING..Hello..To.proceed...2 
-  STRING.kill.yourself.3 STRING.You.ve.exceeded.the..4 STRING.hi.5 
-  STRING.You.have.tried.to.us.6 STRING.You.have.entered.an..7 
-  STRING.You.have.tried.to.us.8 STRING.You.have.tried.to.us.9 
-  STRING.0123456789.10 STRING.exiting....11 STRING.fuck.you.12 
-  STRING..Please.enter.a.comm.13 STRING.Hello..Here.are.the..1 
+  STRING.kill.yourself.3 STRING.You.ve.exceeded.the..4 
+  STRING.You.have.tried.to.us.5 STRING.You.have.entered.an..6 
+  STRING.You.have.tried.to.us.7 STRING.You.have.tried.to.us.8 
+  STRING.0123456789.9 STRING.exiting....10 STRING.fuck.you.11 
+  STRING..Please.enter.a.comm.12 STRING.Hello..Here.are.the..1 
   STRING.Type..S.X..to.change.2 STRING.Type.T.followed.by.a.3 
   STRING.Type.W.followed.by.a.4 
 SECTION: ".abs_section_8"
@@ -1619,23 +1619,23 @@ OBJECT LIST SORTED BY ADDRESS
      _CFORC                                      41       1       1       0   .abs_section_41
      _OC7M                                       42       1       1       0   .abs_section_42
      _OC7D                                       43       1       1       0   .abs_section_43
-     _TCNT                                       44       2       2       3   .abs_section_44
+     _TCNT                                       44       2       2       2   .abs_section_44
      _TSCR1                                      46       1       1       1   .abs_section_46
      _TTOV                                       47       1       1       0   .abs_section_47
      _TCTL1                                      48       1       1       1   .abs_section_48
      _TCTL2                                      49       1       1       0   .abs_section_49
      _TCTL3                                      4A       1       1       0   .abs_section_4a
      _TCTL4                                      4B       1       1       0   .abs_section_4b
-     _TIE                                        4C       1       1       1   .abs_section_4c
-     _TSCR2                                      4D       1       1       2   .abs_section_4d
+     _TIE                                        4C       1       1       0   .abs_section_4c
+     _TSCR2                                      4D       1       1       1   .abs_section_4d
      _TFLG1                                      4E       1       1       0   .abs_section_4e
-     _TFLG2                                      4F       1       1       2   .abs_section_4f
+     _TFLG2                                      4F       1       1       0   .abs_section_4f
      _TC0                                        50       2       2       0   .abs_section_50
      _TC1                                        52       2       2       0   .abs_section_52
      _TC2                                        54       2       2       0   .abs_section_54
      _TC3                                        56       2       2       0   .abs_section_56
      _TC4                                        58       2       2       0   .abs_section_58
-     _TC5                                        5A       2       2       2   .abs_section_5a
+     _TC5                                        5A       2       2       1   .abs_section_5a
      _TC6                                        5C       2       2       0   .abs_section_5c
      _TC7                                        5E       2       2       0   .abs_section_5e
      _PACTL                                      60       1       1       0   .abs_section_60
@@ -1916,7 +1916,7 @@ OBJECT LIST SORTED BY ADDRESS
      _CAN4TXDLR                                 2BC       1       1       0   .abs_section_2bc
      _CAN4TXTBPR                                2BD       1       1       0   .abs_section_2bd
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
-     period                                    1100       2       2       2   .data       
+     period                                    1100       2       2       1   .data       
      j                                         1102       2       2       6   .bss        
      exercise_1_flag                           1104       2       2       2   .bss        
      new_command                               1106       2       2       7   .bss        
@@ -1929,49 +1929,49 @@ OBJECT LIST SORTED BY ADDRESS
      STRING..Hello..To.proceed...2             C051      64     100       1   .rodata1    
      STRING.kill.yourself.3                    C0B5       E      14       1   .rodata1    
      STRING.You.ve.exceeded.the..4             C0C3      2E      46       1   .rodata1    
-     STRING.hi.5                               C0F1       3       3       1   .rodata1    
-     STRING.You.have.tried.to.us.6             C0F4      72     114       1   .rodata1    
-     STRING.You.have.entered.an..7             C166      51      81       1   .rodata1    
-     STRING.You.have.tried.to.us.8             C1B7      7E     126       1   .rodata1    
-     STRING.You.have.tried.to.us.9             C235      7B     123       1   .rodata1    
-     STRING.0123456789.10                      C2B0       B      11       1   .rodata1    
-     STRING.exiting....11                      C2BB       B      11       1   .rodata1    
-     STRING.fuck.you.12                        C2C6       9       9       1   .rodata1    
-     STRING..Please.enter.a.comm.13            C2CF      19      25       1   .rodata1    
-     STRING.Hello..Here.are.the..1             C2E8      54      84       1   .rodata1    
-     STRING.Type..S.X..to.change.2             C33C      61      97       1   .rodata1    
-     STRING.Type.T.followed.by.a.3             C39D      5A      90       1   .rodata1    
-     STRING.Type.W.followed.by.a.4             C3F7      56      86       1   .rodata1    
-     main                                      C44D      AB     171       1   .text       
-     serialISR                                 C4F8      7D     125       1   .text       
-     speakerISR                                C575      17      23       1   .text       
-     run_instruction                           C58C      E1     225       1   .text       
-     death_to_hcs12                            C66D      29      41       1   .text       
-     isdigit                                   C696       E      14       1   .text       
-     isspace                                   C6A4      17      23       2   .text       
-     toupper                                   C6BB      14      20       3   .text       
-     CheckCharWithBase                         C6CF      39      57       1   .text       
-     _strtoul                                  C708     170     368       8   .text       
-     _strtol                                   C878      D0     208       3   .text       
-     strtol                                    C948      13      19       1   .text       
-     strlen                                    C95B      14      20       4   .text       
-     strcpy                                    C96F       D      13       1   .text       
-     strcmp                                    C97C      19      25       1   .text       
-     serialRegisters                           C995       E      14       1   .text       
-     SerialOutputString                        C9A3      2C      44       6   .text       
-     SerialOutputChar                          C9CF       9       9       2   .text       
-     sevensegmodule                            C9D8      5D      93       2   .text       
-     ledOn                                     CA35      13      19       2   .text       
-     ledOff                                    CA48       E      14       3   .text       
-     timedLED                                  CA56      12      18       1   .text       
-     print_help                                CA68      1F      31       1   .text       
-     delay_ms                                  CA87      1F      31       1   .text       
-     _LCMP_P                                   CAA6      15      21       1   RUNTIME     
-     _LNEG                                     CABB       D      13       2   RUNTIME     
-     _LMULS16x32                               CAC8      1F      31       1   RUNTIME     
-     _lDivMod                                  CAE7      BE     190       1   RUNTIME     
-     _LDIVU                                    CBA5       E      14       1   RUNTIME     
-     _ILSEXT                                   CBB3       7       7       2   RUNTIME     
+     STRING.You.have.tried.to.us.5             C0F1      72     114       1   .rodata1    
+     STRING.You.have.entered.an..6             C163      51      81       1   .rodata1    
+     STRING.You.have.tried.to.us.7             C1B4      7E     126       1   .rodata1    
+     STRING.You.have.tried.to.us.8             C232      7B     123       1   .rodata1    
+     STRING.0123456789.9                       C2AD       B      11       1   .rodata1    
+     STRING.exiting....10                      C2B8       B      11       1   .rodata1    
+     STRING.fuck.you.11                        C2C3       9       9       1   .rodata1    
+     STRING..Please.enter.a.comm.12            C2CC      19      25       1   .rodata1    
+     STRING.Hello..Here.are.the..1             C2E5      54      84       1   .rodata1    
+     STRING.Type..S.X..to.change.2             C339      61      97       1   .rodata1    
+     STRING.Type.T.followed.by.a.3             C39A      5A      90       1   .rodata1    
+     STRING.Type.W.followed.by.a.4             C3F4      56      86       1   .rodata1    
+     main                                      C44A      87     135       1   .text       
+     serialISR                                 C4D1      7D     125       1   .text       
+     speakerISR                                C54E       C      12       1   .text       
+     run_instruction                           C55A      E1     225       1   .text       
+     death_to_hcs12                            C63B      29      41       1   .text       
+     isdigit                                   C664       E      14       1   .text       
+     isspace                                   C672      17      23       2   .text       
+     toupper                                   C689      14      20       3   .text       
+     CheckCharWithBase                         C69D      39      57       1   .text       
+     _strtoul                                  C6D6     170     368       8   .text       
+     _strtol                                   C846      D0     208       3   .text       
+     strtol                                    C916      13      19       1   .text       
+     strlen                                    C929      14      20       4   .text       
+     strcpy                                    C93D       D      13       1   .text       
+     strcmp                                    C94A      19      25       1   .text       
+     serialRegisters                           C963       E      14       1   .text       
+     SerialOutputString                        C971      2C      44       5   .text       
+     SerialOutputChar                          C99D       9       9       2   .text       
+     sevensegmodule                            C9A6      5D      93       2   .text       
+     ledOn                                     CA03      13      19       2   .text       
+     ledOff                                    CA16       E      14       3   .text       
+     timedLED                                  CA24      12      18       1   .text       
+     print_help                                CA36      1F      31       1   .text       
+     delay_ms                                  CA55      1F      31       1   .text       
+     setup_timers                              CA74       E      14       1   .text       
+     _LCMP_P                                   CA82      15      21       1   RUNTIME     
+     _LNEG                                     CA97       D      13       2   RUNTIME     
+     _LMULS16x32                               CAA4      1F      31       1   RUNTIME     
+     _lDivMod                                  CAC3      BE     190       1   RUNTIME     
+     _LDIVU                                    CB81       E      14       1   RUNTIME     
+     _ILSEXT                                   CB8F       7       7       2   RUNTIME     
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
      _Vector_13                                FFE4       2       2       0   .abs_section_ffe4
 
@@ -1979,6 +1979,8 @@ OBJECT LIST SORTED BY ADDRESS
 UNUSED-OBJECTS SECTION
 ---------------------------------------------------------------------------------------------
 NOT USED PROCEDURES
+main.c.o:
+  play_song 
 CTYPE.C.o (ansisi.lib):
   isalnum isalpha iscntrl isgraph islower isprint ispunct isupper isxdigit 
   tolower 
@@ -1998,6 +2000,8 @@ rtshc12.c.o (ansisi.lib):
 serial.c.o:
   clear_string 
 NOT USED VARIABLES
+main.c.o:
+  note duration 
 CTYPE.C.o (ansisi.lib):
   _ctype 
 STDLIB.C.o (ansisi.lib):
@@ -2012,13 +2016,13 @@ serial.c.o:
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xCBBA ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xCB96 ---- SIZE       4 ---
 Filling bytes inserted
- 00011100
-------- ROM-ADDRESS: 0xCBBE ---- RAM-ADDRESS: 0x1100 ---- SIZE       1 ---
-Name of initialized Object : period
- E1
-------- ROM-ADDRESS: 0xCBBF ---- SIZE       2 ---
+ 00011101
+------- ROM-ADDRESS: 0xCB9A ---- RAM-ADDRESS: 0x1101 ---- SIZE       1 ---
+Name of initialized Object : period:1
+ 14
+------- ROM-ADDRESS: 0xCB9B ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -2028,23 +2032,21 @@ OBJECT-DEPENDENCIES SECTION
 Init                      USES _startupData 
 _Startup                  USES __SEG_END_SSTACK Init main 
 main                      USES STRING.Exercise.1.completed.1 
-                                STRING..Hello..To.proceed...2 serialRegisters _TSCR1 _TSCR2 _TFLG2 _TIOS 
-                                _TCTL1 _TCNT period _TC5 _TIE exercise_1_flag 
+                                STRING..Hello..To.proceed...2 serialRegisters setup_timers exercise_1_flag 
                                 new_command command STRING.kill.yourself.3 strcmp 
                                 death_to_hcs12 run_instruction strtol sevensegmodule strlen 
                                 SerialOutputString 
 serialISR                 USES STRING.You.ve.exceeded.the..4 strlen _SCI1SR1 
                                 _SCI1DRL j sentence command strcpy new_command 
                                 SerialOutputChar exercise_1_flag 
-speakerISR                USES _TCNT period _TC5 STRING.hi.5 
-                                SerialOutputString 
-run_instruction           USES STRING.You.have.tried.to.us.6 
-                                STRING.You.have.entered.an..7 STRING.You.have.tried.to.us.8 
-                                STRING.You.have.tried.to.us.9 STRING.0123456789.10 ledOff ledOn print_help 
-                                sevensegmodule STRING.exiting....11 timedLED strlen 
+speakerISR                USES _TCNT period _TC5 
+run_instruction           USES STRING.You.have.tried.to.us.5 
+                                STRING.You.have.entered.an..6 STRING.You.have.tried.to.us.7 
+                                STRING.You.have.tried.to.us.8 STRING.0123456789.9 ledOff ledOn print_help 
+                                sevensegmodule STRING.exiting....10 timedLED strlen 
                                 SerialOutputString new_command 
-death_to_hcs12            USES new_command STRING.fuck.you.12 
-                                SerialOutputString STRING..Please.enter.a.comm.13 
+death_to_hcs12            USES new_command STRING.fuck.you.11 
+                                SerialOutputString STRING..Please.enter.a.comm.12 
 CheckCharWithBase         USES toupper 
 _strtoul                  USES _strtoul isspace toupper _ILSEXT _LDIVU _LCMP_P 
                                 _LMULS16x32 errno CheckCharWithBase 
@@ -2060,6 +2062,7 @@ timedLED                  USES ledOn delay_ms ledOff
 print_help                USES STRING.Hello..Here.are.the..1 
                                 STRING.Type..S.X..to.change.2 STRING.Type.T.followed.by.a.3 
                                 STRING.Type.W.followed.by.a.4 strlen SerialOutputString 
+setup_timers              USES _TSCR1 _TSCR2 _TIOS _TCTL1 
 _LMULS16x32               USES _LNEG 
 _LDIVU                    USES _lDivMod 
 _Vector_21                USES serialISR 
@@ -2073,6 +2076,8 @@ DEPENDENCY TREE
  +- main                
  |  | 
  |  +- serialRegisters     
+ |  |    
+ |  +- setup_timers        
  |  |    
  |  +- strcmp              
  |  |    
@@ -2163,15 +2168,13 @@ DEPENDENCY TREE
  _Vector_13          
  | 
  +- speakerISR          
-    | 
-    +- SerialOutputString   (see above)
-       
+      
 *********************************************************************************************
 STATISTIC SECTION
 ---------------------------------------------------------------------------------------------
 
 ExeFile:
 --------
-Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 3015
+Number of blocks to be downloaded: 7
+Total size of all blocks to be downloaded: 2979
 

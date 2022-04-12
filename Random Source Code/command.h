@@ -2,8 +2,6 @@
 #define COMMANDS
 
 
-
-
 //functions to execute changing the seven seg
 void sevensegmodule(int number);
 
@@ -13,7 +11,7 @@ void ledOn(void);
 //function to turn leds off
 void ledOff(void);
 
-
+//prints the help function
 void print_help();
 
 

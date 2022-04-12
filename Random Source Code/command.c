@@ -5,9 +5,6 @@
 #include <string.h>
 
 
-
-
-
 void sevensegmodule(int number){
   unsigned char SegPat[10] = {
   0x3F,         // pattern for 0
@@ -98,4 +95,5 @@ void print_help(){
   return;
 
 }
+
 
