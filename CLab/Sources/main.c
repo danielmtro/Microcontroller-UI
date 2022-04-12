@@ -6,7 +6,8 @@
 #include "command.h"
 #include "timing.h"
 
-#define BUFFER 30
+#define BUFFER 100
+#define TUNE_SIZE 100
 
 #define rest 20
 #define Eb3 9641
@@ -370,6 +371,12 @@ void run_instruction(char *instruction) {
     }
       
   }
+  else if (command == 'M') {
+    int notes[TUNE_SIZE];
+    int durations[TUNE_SIZE];
+    command_to_tune(&instruction[2], &notes[0], &durations[0]);
+    play_song(&notes[0], &durations[0]);
+  }
   else {   
     SerialOutputString(error2, strlen(error2));
   }
@@ -411,6 +418,13 @@ void play_note(int note_num, int duration_num) {
   
 }
 
+void play_song(int *notes, int *durations) {
+  int i = 0;
+  while (notes[i] != -1) {
+    play_note(notes[i], durations[i])
+    i++;
+  }
+}
 
 void play_mii() {
 int i;

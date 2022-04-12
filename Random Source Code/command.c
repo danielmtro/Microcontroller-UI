@@ -3,7 +3,11 @@
 #include "command.h"
 #include "serial.h"
 #include <string.h>
+#include <stdlib.h>
 
+#define TUNE_SIZE 100
+#define NUM_NOTES 31
+#define NUM_DURATIONS 7
 
 void sevensegmodule(int number){
   unsigned char SegPat[10] = {
@@ -78,6 +82,109 @@ void timedLED(int time) {
   delay_ms(tot);
   ledOff();
   
+}
+
+void command_to_tune(char *command, int *notes, int *durations) {
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    char user_note[4];
+    char user_duration[4];
+    char *valid_notes[NUM_NOTES] = {
+        "rst",
+        "Eb3",
+        "E3-",
+        "F3-",
+        "Gb3",
+        "G3-",
+        "Ab3",
+        "A3-",
+        "Bb3",
+        "B3-",
+        "C4-",
+        "Db4",
+        "D4-",
+        "Eb4",
+        "E4-",
+        "F4-",
+        "Gb4",
+        "G4-",
+        "Ab4",
+        "A4-",
+        "Bb4",
+        "B4-",
+        "C5-",
+        "Db5",
+        "D5-",
+        "Eb5",
+        "E5-",
+        "F5-",
+        "Gb5",
+        "G5-",
+        "Ab5"
+    };
+    char *valid_durations[NUM_DURATIONS] = {
+        "1-",
+        "2-",
+        "4-",
+        "8-",
+        "16",
+        "32",
+        "64"
+    };
+    int tune_duration = 0;
+    char *error_mssg = "Invalid note given (or placed in wrong position) - command won't execute fully";
+    char *playing_mssg1 = "The tune will play for approximately:";
+    char *playing_mssg2 = "seconds, at 120 BPM";
+    char tune_dur[4];
+    while (command[i] != '\0') {
+        if (i % 6 == 0) { // command[i] should be a note to play
+            strncpy(&user_note[0], &command[i], 3);
+            user_note[3] = '\0';
+            k = 0;
+            while (k < NUM_NOTES) {
+                if (!strcmp(user_note, valid_notes[k])) {
+                    notes[j] = k; // the index will be used in the play_note function
+                    break;
+                }
+                k++;
+            }
+            if (k == NUM_NOTES) {
+                SerialOutputString(error_mssg, strlen(error_mssg));
+                break;
+            }
+        } else if (i % 6 == 3) { // command[i] should be the duration of the letter
+            strncpy(&user_duration[0], &command[i], 2);
+            user_duration[2] = '\0';
+            k = 0;
+            while (k < NUM_DURATIONS) {
+                if (!strcmp(user_duration, valid_durations[k])) {
+                    durations[j] = k; // the index will be used in the play_note function
+                    j++;
+                    break;
+                }
+                k++;
+            }
+            if (k == NUM_DURATIONS) {
+                SerialOutputString(error_mssg, strlen(error_mssg));
+                break;
+            }
+        }
+        i++;
+    }
+    notes[j] = -1;
+    durations[j] = -1;
+
+    i = 0;
+    while (durations[i] != -1) {
+        tune_duration = tune_duration + atoi(valid_durations[durations[i]]);
+        i++;
+    }
+    tune_duration = tune_duration / 8; // semiquavers to seconds
+    itoa(tune_duration, tune_dur, 10);
+    SerialOutputString(playing_mssg1, strlen(playing_mssg1));
+    SerialOutputString(&tune_dur[0], strlen(&tune_dur[0]));
+    SerialOutputString(playing_mssg2, strlen(playing_mssg2));
 }
 
 
