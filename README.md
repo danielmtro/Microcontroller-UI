@@ -56,13 +56,13 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 Exercise 1
 
-input = "hello/n"
-
-output (terminal) = "hello\n"
-
-output (terminal) = "Exercise 1 completed!\n"
-
-output (terminal) = "\nHello!\nTo proceed, please enter a command. If you don't know the current commands type 'H'.\nEnjoy!"
+>input = "hello/n"
+>
+>output (terminal) = "hello\n"
+>
+>output (terminal) = "Exercise 1 completed!\n"
+>
+>output (terminal) = "\nHello!\nTo proceed, please enter a command. If you don't know the current commands type 'H'.\nEnjoy!"
 
 
 
