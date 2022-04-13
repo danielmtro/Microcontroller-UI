@@ -54,7 +54,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 # Test cases
 
-###Exercise 1
+### Exercise 1
 
 >input = "hello/n"
 >
@@ -79,7 +79,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 
 
-###Exercise 2
+### Exercise 2
 
 
 >input = "Jwdwj/n"
@@ -105,6 +105,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 >                      Type "F" to exit/n"
                       
 
+#### LEDs
 
 >input = "L 4/n"
 >
@@ -113,6 +114,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 >output (terminal) = "You have tried to use an LED command, but entered an invalid argument. This command accepts the arguments 0 or 1."
 >
 >output (LEDs) = remain in current state
+
 
 
 
@@ -127,6 +129,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 
 
+
 >input = "L 0/n"
 >
 >output (terminal) = "Command in progress/n"
@@ -134,6 +137,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 >output (LEDs) = All off (regardless of previous state of LEDs)
 >
 >output (terminal) = "Command finished, Please enter new command/n"
+
 
 
 
@@ -147,9 +151,11 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 
 
+
 >input = "T 8/n" 
 >
 >output (terminal) = "Command in progress/n"
+
 
 
 
@@ -162,10 +168,14 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 
 
+
 >input = "T 20/n"
 >
 >output (terminal) = "You have tried to use a LED timed command but entered an invalid argument.This command accepts the arguments integers 0-9."
 
+
+
+#### Seven Segment Display
 
 
 >input = "S 5/n"
@@ -175,6 +185,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 >output (7-SEG) = 5
 >
 >output (terminal) = "Command finished, Please enter new command/n"
+
 
 
 
@@ -190,9 +201,12 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 
 
+
 >input = "S E"
 >
 >output (terminal)= "You have tried to use an Seven Seg command, but entered an invalid argument. This command accepts the arguments integers 0-9."
+
+
 
 
 >input = "S 23/n"
@@ -204,6 +218,9 @@ Once the user is finished with entering their own tunes, they can enter the fina
 
 
 
+#### Write 
+
+
 >input = "W Hello world!/n"
 >
 >output (terminal) = "Command in progress/n"
@@ -211,6 +228,7 @@ Once the user is finished with entering their own tunes, they can enter the fina
 >output (terminal) = "Hello world!/n"
 >
 >output (terminal) = "Command finished, Please enter new command/n"
+
 
 
 
@@ -225,6 +243,10 @@ Once the user is finished with entering their own tunes, they can enter the fina
 >output (terminal) = "Command finished, Please enter new command/n"
 
 
+
+#### Music
+
+
 >input = "M C5-8-/n"
 >
 >output (terminal) = "Command in progress/n"
@@ -237,6 +259,8 @@ Once the user is finished with entering their own tunes, they can enter the fina
 >                    
 >                     
 >output (speaker) =  will play c (one octave above middle c) for one minim
+
+
 
 
 >input = "M C5-8- H7-9-/n"
