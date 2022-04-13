@@ -1,6 +1,12 @@
 # Group-7
 C-Lab MTRX2700
 
+Contributions:
+
+Will:
+
+- 
+
 # Serial interrupts
 
 Part 1 uses a single serial interrupt service routine to read one character at a time for each interrupt (so as to minimise impact on other functions that are running). It also sends out these characters immediately, so that the user can see what they are typing. Then, when the user hits enter, another interrupt is triggered which sends out a whole string.
