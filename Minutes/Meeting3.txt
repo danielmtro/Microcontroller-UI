@@ -1,1 +1,25 @@
+Meeting Before Presentation
+Date: 8/04/2022
 
+
+Present: Everyone
+
+Agenda: Get everything working
+
+Notes:
+
+-Everything working at the moment including 7 seg module nad LED's
+- Serial input working
+-Exercise 1 and 2 mostly complete 
+
+-edit(MICROCONTROLLER SPEAKER NOT WORKING)
+
+Things to do today:
+-Get the music module working with theoretical code
+- Get something that can parse commands into music module
+
+
+Things to do over the next few days:
+-Get new micontroller with working speaker
+-Finish everything off
+-Get the git repo under control 
