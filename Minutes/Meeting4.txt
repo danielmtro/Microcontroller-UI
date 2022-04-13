@@ -1,1 +1,23 @@
+FINAL MEETING BEFORE PRESENTING
+Date: 13//04/2022
 
+Present: Everyone
+
+Notes:
+-Pretty much finished everything
+-Can play music and the mii theme song
+-Currently the parser is working in simulation but not on hardware
+
+AFTER MEETING:
+
+- Spent hours working on debugging only 
+  to discover that the problem was simply 
+  allocating more memory to the stack
+  the more you know ahaha.
+
+Things to do for today:
+-Get the parser working on hardware
+-Clean up all the code
+-Allow for both serial ports to be implementeed
+-Fix up the repo properly
+-Add organised test cases
