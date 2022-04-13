@@ -1,5 +1,5 @@
 *** EVALUATION ***
-PROGRAM "C:\Users\pbriozzo\Documents\TRON2\Group-7\CLab\bin\Project.absHCS12_Serial_Monitor.abs"
+PROGRAM "C:\Users\Danie\OneDrive\Desktop\Uni\3rdYear\Test\CLab\bin\Project.absHCS12_Serial_Monitor.abs"
 
 *********************************************************************************************
 TARGET SECTION
@@ -30,8 +30,8 @@ Entry point: 0xC029 (_Startup)
 _startupData is allocated at 0xC03B and uses 6 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     1
-  _Range   pZeroOut       0x1100     368
-  _Copy    *toCopyDownBeg 0xCFDA
+  _Range   pZeroOut       0x2000     226
+  _Copy    *toCopyDownBeg 0xD0D2
 } _startupData;
 
 *********************************************************************************************
@@ -40,11 +40,11 @@ Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
 .init                             59     R     0xC000     0xC03A   ROM_C000
 .startData                        10     R     0xC03B     0xC044   ROM_C000
-.rodata1                        1319     R     0xC045     0xC56B   ROM_C000
-.text                           2394     R     0xC56C     0xCEC5   ROM_C000
-.copy                            165     R     0xCFDA     0xD07E   ROM_C000
-.stack                           256   R/W     0x1000     0x10FF   RAM
-.data                            160   R/W     0x1100     0x119F   RAM
+.rodata1                        1513     R     0xC045     0xC62D   ROM_C000
+.text                           2448     R     0xC62E     0xCFBD   ROM_C000
+.copy                            163     R     0xD0D2     0xD174   ROM_C000
+.stack                          4096   R/W     0x1000     0x1FFF   RAM
+.data                            158   R/W     0x2000     0x209D   RAM
 .abs_section_8                     1   N/I        0x8        0x8   .absSeg0
 .abs_section_9                     1   N/I        0x9        0x9   .absSeg1
 .abs_section_a                     1   N/I        0xA        0xA   .absSeg2
@@ -388,14 +388,14 @@ Section Name                    Size  Type     From       To       Segment
 .abs_section_2be                   2   N/I      0x2BE      0x2BF   .absSeg340
 .abs_section_ffd4                  2     R     0xFFD4     0xFFD5   .absSeg341
 .abs_section_ffe4                  2     R     0xFFE4     0xFFE5   .absSeg342
-.bss                               6   R/W     0x11A0     0x11A5   RAM
-.common                          202   R/W     0x11A6     0x126F   RAM
-RUNTIME                          276     R     0xCEC6     0xCFD9   ROM_C000
+.bss                               6   R/W     0x209E     0x20A3   RAM
+.common                           62   R/W     0x20A4     0x20E1   RAM
+RUNTIME                          276     R     0xCFBE     0xD0D1   ROM_C000
 .vectSeg343_vect                   2     R     0xFFFE     0xFFFF   .vectSeg343
 
 Summary of section sizes per section type:
-READ_ONLY (R):        1085 (dec:     4229)
-READ_WRITE (R/W):      270 (dec:      624)
+READ_ONLY (R):        117B (dec:     4475)
+READ_WRITE (R/W):     10E2 (dec:     4322)
 NO_INIT (N/I):         190 (dec:      400)
 
 *********************************************************************************************
@@ -754,14 +754,14 @@ MODULE:                 -- mc9s12dg256.c.o --
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
 MODULE:                 -- main.c.o --
 - PROCEDURES:
-     main                                      C56C      86     134       1   .text       
-     serialISR                                 C5F2      7D     125       1   .text       
-     speakerISR                                C66F       8       8       1   .text       
-     run_instruction                           C677     10E     270       4   .text       
-     play_note                                 C785      31      49       2   .text       
-     play_song                                 C7B6      30      48       1   .text       
-     play_mii                                  C7E6      1F      31       1   .text       
-     death_to_hcs12                            C805      29      41       1   .text       
+     main                                      C62E      86     134       1   .text       
+     serialISR                                 C6B4      7D     125       1   .text       
+     speakerISR                                C731       8       8       1   .text       
+     run_instruction                           C739     10D     269       4   .text       
+     play_song                                 C846      31      49       1   .text       
+     play_note                                 C877      31      49       2   .text       
+     play_mii                                  C8A8      1F      31       1   .text       
+     death_to_hcs12                            C8C7      29      41       1   .text       
 - VARIABLES:
      STRING.Exercise.1.completed.1             C045      16      22       1   .rodata1    
      STRING..Hello..To.proceed...2             C05B      64     100       1   .rodata1    
@@ -771,22 +771,22 @@ MODULE:                 -- main.c.o --
      STRING.You.have.entered.an..6             C16D      51      81       1   .rodata1    
      STRING.You.have.tried.to.us.7             C1BE      7E     126       1   .rodata1    
      STRING.You.have.tried.to.us.8             C23C      7B     123       1   .rodata1    
-     STRING.0123456789.9                       C2B7       B      11       1   .rodata1    
-     STRING.exiting....10                      C2C2       B      11       1   .rodata1    
-     STRING.fuck.you.11                        C2CD       9       9       1   .rodata1    
-     STRING.Please.enter.a.comma.12            C2D6      17      23       1   .rodata1    
-     note                                      1100      3E      62       1   .data       
-     mii_song_notes                            113E      28      40       1   .data       
-     mii_song_duration                         1166      28      40       1   .data       
-     duration                                  118E      10      16       1   .data       
-     period                                    119E       2       2       3   .data       
-     j                                         11A0       2       2       6   .bss        
-     exercise_1_flag                           11A2       2       2       2   .bss        
-     new_command                               11A4       2       2       7   .bss        
+     STRING.exiting....Enjoy.som.9             C2B7      23      35       1   .rodata1    
+     STRING.0123456789.10                      C2DA       B      11       1   .rodata1    
+     STRING.fuck.you.11                        C2E5       9       9       1   .rodata1    
+     STRING.Please.enter.a.comma.12            C2EE      17      23       1   .rodata1    
+     note                                      2000      3E      62       1   .data       
+     mii_song_notes                            203E      28      40       1   .data       
+     mii_song_duration                         2066      28      40       1   .data       
+     duration                                  208E       E      14       1   .data       
+     period                                    209C       2       2       3   .data       
+     j                                         209E       2       2       6   .bss        
+     exercise_1_flag                           20A0       2       2       2   .bss        
+     new_command                               20A2       2       2       7   .bss        
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
      _Vector_13                                FFE4       2       2       0   .abs_section_ffe4
-     sentence                                  11A6      64     100       3   .common     
-     command                                   120A      64     100       6   .common     
+     sentence                                  20A4      1E      30       3   .common     
+     command                                   20C2      1E      30       6   .common     
 MODULE:                 -- Start12.c.o --
 - PROCEDURES:
      Init                                      C000      29      41       1   .init       
@@ -794,101 +794,104 @@ MODULE:                 -- Start12.c.o --
 - VARIABLES:
      _startupData                              C03B       6       6       3   .startData  
 - LABELS:
-     __SEG_END_SSTACK                          1100       0       0       1               
+     __SEG_END_SSTACK                          2000       0       0       1               
 MODULE:                 -- CTYPE.C.o (ansisi.lib) --
 - PROCEDURES:
-     isdigit                                   C82E       E      14       1   .text       
-     isspace                                   C83C      17      23       2   .text       
-     toupper                                   C853      14      20       3   .text       
+     isdigit                                   C8F0       E      14       1   .text       
+     isspace                                   C8FE      17      23       2   .text       
+     toupper                                   C915      14      20       3   .text       
 - VARIABLES:
 MODULE:                 -- STDLIB.C.o (ansisi.lib) --
 - PROCEDURES:
-     CheckCharWithBase                         C867      39      57       1   .text       
-     _strtoul                                  C8A0     170     368       8   .text       
-     _strtol                                   CA10      D0     208       3   .text       
-     strtol                                    CAE0      13      19       2   .text       
+     CheckCharWithBase                         C929      39      57       1   .text       
+     _strtoul                                  C962     170     368       8   .text       
+     _strtol                                   CAD2      D0     208       3   .text       
+     strtol                                    CBA2      13      19       2   .text       
 - VARIABLES:
 MODULE:                 -- STRING.C.o (ansisi.lib) --
 - PROCEDURES:
-     strlen                                    CAF3      14      20       6   .text       
-     strcpy                                    CB07       D      13       1   .text       
-     strncpy                                   CB14      2D      45       2   .text       
-     strcmp                                    CB41      19      25       3   .text       
+     strlen                                    CBB5      14      20       6   .text       
+     strcpy                                    CBC9       D      13       1   .text       
+     strncpy                                   CBD6      2D      45       2   .text       
+     strcmp                                    CC03      19      25       3   .text       
 - VARIABLES:
 MODULE:                 -- rtshc12.c.o (ansisi.lib) --
 - PROCEDURES:
-     _LCMP_P                                   CEC6      15      21       1   RUNTIME     
-     _LNEG                                     CEDB       D      13       2   RUNTIME     
-     _LMULS16x32                               CEE8      1F      31       1   RUNTIME     
-     _lDivMod                                  CF07      BE     190       1   RUNTIME     
-     _LDIVU                                    CFC5       E      14       1   RUNTIME     
-     _ILSEXT                                   CFD3       7       7       2   RUNTIME     
+     _LCMP_P                                   CFBE      15      21       1   RUNTIME     
+     _LNEG                                     CFD3       D      13       2   RUNTIME     
+     _LMULS16x32                               CFE0      1F      31       1   RUNTIME     
+     _lDivMod                                  CFFF      BE     190       1   RUNTIME     
+     _LDIVU                                    D0BD       E      14       1   RUNTIME     
+     _ILSEXT                                   D0CB       7       7       2   RUNTIME     
 - VARIABLES:
-     errno                                     126E       2       2       2   .common     
+     errno                                     20E0       2       2       2   .common     
 MODULE:                 -- serial.c.o --
 - PROCEDURES:
-     serialRegisters                           CB5A       E      14       1   .text       
-     SerialOutputString                        CB68      2C      44       7   .text       
-     SerialOutputChar                          CB94       9       9       2   .text       
+     serialRegisters                           CC1C       E      14       1   .text       
+     SerialOutputString                        CC2A      2C      44       7   .text       
+     SerialOutputChar                          CC56       9       9       2   .text       
 - VARIABLES:
 MODULE:                 -- command.c.o --
 - PROCEDURES:
-     sevensegmodule                            CB9D      5D      93       2   .text       
-     ledOn                                     CBFA      13      19       2   .text       
-     ledOff                                    CC0D       E      14       3   .text       
-     timedLED                                  CC1B      12      18       1   .text       
-     command_to_tune                           CC2D     250     592       4   .text       
-     print_help                                CE7D      1F      31       1   .text       
+     sevensegmodule                            CC5F      5D      93       2   .text       
+     ledOn                                     CCBC      13      19       2   .text       
+     ledOff                                    CCCF       E      14       3   .text       
+     timedLED                                  CCDD      12      18       1   .text       
+     print_help                                CCEF      2E      46       1   .text       
+     command_to_tune                           CD1D     277     631       4   .text       
 - VARIABLES:
-     STRING.rst.1                              C2ED       4       4       1   .rodata1    
-     STRING.Eb3.2                              C2F1       4       4       1   .rodata1    
-     STRING.E3..3                              C2F5       4       4       1   .rodata1    
-     STRING.F3..4                              C2F9       4       4       1   .rodata1    
-     STRING.Gb3.5                              C2FD       4       4       1   .rodata1    
-     STRING.G3..6                              C301       4       4       1   .rodata1    
-     STRING.Ab3.7                              C305       4       4       1   .rodata1    
-     STRING.A3..8                              C309       4       4       1   .rodata1    
-     STRING.Bb3.9                              C30D       4       4       1   .rodata1    
-     STRING.B3..10                             C311       4       4       1   .rodata1    
-     STRING.C4..11                             C315       4       4       1   .rodata1    
-     STRING.Db4.12                             C319       4       4       1   .rodata1    
-     STRING.D4..13                             C31D       4       4       1   .rodata1    
-     STRING.Eb4.14                             C321       4       4       1   .rodata1    
-     STRING.E4..15                             C325       4       4       1   .rodata1    
-     STRING.F4..16                             C329       4       4       1   .rodata1    
-     STRING.Gb4.17                             C32D       4       4       1   .rodata1    
-     STRING.G4..18                             C331       4       4       1   .rodata1    
-     STRING.Ab4.19                             C335       4       4       1   .rodata1    
-     STRING.A4..20                             C339       4       4       1   .rodata1    
-     STRING.Bb4.21                             C33D       4       4       1   .rodata1    
-     STRING.B4..22                             C341       4       4       1   .rodata1    
-     STRING.C5..23                             C345       4       4       1   .rodata1    
-     STRING.Db5.24                             C349       4       4       1   .rodata1    
-     STRING.D5..25                             C34D       4       4       1   .rodata1    
-     STRING.Eb5.26                             C351       4       4       1   .rodata1    
-     STRING.E5..27                             C355       4       4       1   .rodata1    
-     STRING.F5..28                             C359       4       4       1   .rodata1    
-     STRING.Gb5.29                             C35D       4       4       1   .rodata1    
-     STRING.G5..30                             C361       4       4       1   .rodata1    
-     STRING.Ab5.31                             C365       4       4       1   .rodata1    
-     STRING.1..32                              C369       3       3       1   .rodata1    
-     STRING.2..33                              C36C       3       3       1   .rodata1    
-     STRING.4..34                              C36F       3       3       1   .rodata1    
-     STRING.8..35                              C372       3       3       1   .rodata1    
-     STRING.16.36                              C375       3       3       1   .rodata1    
-     STRING.32.37                              C378       3       3       1   .rodata1    
-     STRING.64.38                              C37B       3       3       1   .rodata1    
-     STRING.Invalid.note.given...39            C37E      4F      79       1   .rodata1    
-     STRING.The.tune.will.play.f.40            C3CD      26      38       1   .rodata1    
-     STRING.seconds..at.120.BPM.41             C3F3      14      20       1   .rodata1    
-     STRING.Hello..Here.are.the..42            C407      54      84       1   .rodata1    
-     STRING.Type..S.X..to.change.43            C45B      61      97       1   .rodata1    
-     STRING.Type.T.followed.by.a.44            C4BC      5A      90       1   .rodata1    
-     STRING.Type.W.followed.by.a.45            C516      56      86       1   .rodata1    
+     STRING.Hello..Here.are.the..1             C305      54      84       1   .rodata1    
+     STRING.Type..S.X..to.change.2             C359      61      97       1   .rodata1    
+     STRING.Type..T..followed.by.3             C3BA      5C      92       1   .rodata1    
+     STRING.Type..W..followed.by.4             C416      46      70       1   .rodata1    
+     STRING.Type..M..to.use.the..5             C45C      21      33       1   .rodata1    
+     STRING.Specify.the.note.you.6             C47D      85     133       1   .rodata1    
+     STRING.Type..F..to.exit..7                C502      12      18       1   .rodata1    
+     STRING.rst.8                              C514       4       4       1   .rodata1    
+     STRING.Eb3.9                              C518       4       4       1   .rodata1    
+     STRING.E3..10                             C51C       4       4       1   .rodata1    
+     STRING.F3..11                             C520       4       4       1   .rodata1    
+     STRING.Gb3.12                             C524       4       4       1   .rodata1    
+     STRING.G3..13                             C528       4       4       1   .rodata1    
+     STRING.Ab3.14                             C52C       4       4       1   .rodata1    
+     STRING.A3..15                             C530       4       4       1   .rodata1    
+     STRING.Bb3.16                             C534       4       4       1   .rodata1    
+     STRING.B3..17                             C538       4       4       1   .rodata1    
+     STRING.C4..18                             C53C       4       4       1   .rodata1    
+     STRING.Db4.19                             C540       4       4       1   .rodata1    
+     STRING.D4..20                             C544       4       4       1   .rodata1    
+     STRING.Eb4.21                             C548       4       4       1   .rodata1    
+     STRING.E4..22                             C54C       4       4       1   .rodata1    
+     STRING.F4..23                             C550       4       4       1   .rodata1    
+     STRING.Gb4.24                             C554       4       4       1   .rodata1    
+     STRING.G4..25                             C558       4       4       1   .rodata1    
+     STRING.Ab4.26                             C55C       4       4       1   .rodata1    
+     STRING.A4..27                             C560       4       4       1   .rodata1    
+     STRING.Bb4.28                             C564       4       4       1   .rodata1    
+     STRING.B4..29                             C568       4       4       1   .rodata1    
+     STRING.C5..30                             C56C       4       4       1   .rodata1    
+     STRING.Db5.31                             C570       4       4       1   .rodata1    
+     STRING.D5..32                             C574       4       4       1   .rodata1    
+     STRING.Eb5.33                             C578       4       4       1   .rodata1    
+     STRING.E5..34                             C57C       4       4       1   .rodata1    
+     STRING.F5..35                             C580       4       4       1   .rodata1    
+     STRING.Gb5.36                             C584       4       4       1   .rodata1    
+     STRING.G5..37                             C588       4       4       1   .rodata1    
+     STRING.Ab5.38                             C58C       4       4       1   .rodata1    
+     STRING.64.39                              C590       3       3       1   .rodata1    
+     STRING.32.40                              C593       3       3       1   .rodata1    
+     STRING.16.41                              C596       3       3       1   .rodata1    
+     STRING.8..42                              C599       3       3       1   .rodata1    
+     STRING.4..43                              C59C       3       3       1   .rodata1    
+     STRING.2..44                              C59F       3       3       1   .rodata1    
+     STRING.1..45                              C5A2       3       3       1   .rodata1    
+     STRING.Invalid.note.given...46            C5A5      4F      79       1   .rodata1    
+     STRING.The.tune.will.play.f.47            C5F4      26      38       1   .rodata1    
+     STRING.seconds..at.120.BPM.48             C61A      14      20       1   .rodata1    
 MODULE:                 -- timing.c.o --
 - PROCEDURES:
-     delay_ms                                  CE9C      1F      31       2   .text       
-     setup_timers                              CEBB       B      11       1   .text       
+     delay_ms                                  CF94      1F      31       2   .text       
+     setup_timers                              CFB3       B      11       1   .text       
 - VARIABLES:
 
 *********************************************************************************************
@@ -896,26 +899,26 @@ MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
   mc9s12dg256.c.o                            400      0      0
-  main.c.o                                   366    706    684
+  main.c.o                                   224    706    708
   Start12.c.o                                  0     59      0
   CTYPE.C.o (ansisi.lib)                       0     57      0
   STDLIB.C.o (ansisi.lib)                      0    652      0
   STRING.C.o (ansisi.lib)                      0    103      0
   rtshc12.c.o (ansisi.lib)                     2    276      0
   serial.c.o                                   0     67      0
-  command.c.o                                  0    767    639
+  command.c.o                                  0    821    809
   timing.c.o                                   0     42      0
-  other                                      256     12    165
+  other                                     4096     12    163
 
 *********************************************************************************************
 SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
-  main serialISR speakerISR run_instruction play_note play_song play_mii 
+  main serialISR speakerISR run_instruction play_song play_note play_mii 
   death_to_hcs12 isdigit isspace toupper CheckCharWithBase _strtoul _strtol 
   strtol strlen strcpy strncpy strcmp serialRegisters SerialOutputString 
-  SerialOutputChar sevensegmodule ledOn ledOff timedLED command_to_tune 
-  print_help delay_ms setup_timers 
+  SerialOutputChar sevensegmodule ledOn ledOff timedLED print_help 
+  command_to_tune delay_ms setup_timers 
 SECTION: ".data"
   note mii_song_notes mii_song_duration duration period 
 SECTION: ".bss"
@@ -927,19 +930,20 @@ SECTION: ".rodata1"
   STRING.kill.yourself.3 STRING.You.ve.exceeded.the..4 
   STRING.You.have.tried.to.us.5 STRING.You.have.entered.an..6 
   STRING.You.have.tried.to.us.7 STRING.You.have.tried.to.us.8 
-  STRING.0123456789.9 STRING.exiting....10 STRING.fuck.you.11 
-  STRING.Please.enter.a.comma.12 STRING.rst.1 STRING.Eb3.2 STRING.E3..3 
-  STRING.F3..4 STRING.Gb3.5 STRING.G3..6 STRING.Ab3.7 STRING.A3..8 STRING.Bb3.9 
-  STRING.B3..10 STRING.C4..11 STRING.Db4.12 STRING.D4..13 STRING.Eb4.14 
-  STRING.E4..15 STRING.F4..16 STRING.Gb4.17 STRING.G4..18 STRING.Ab4.19 
-  STRING.A4..20 STRING.Bb4.21 STRING.B4..22 STRING.C5..23 STRING.Db5.24 
-  STRING.D5..25 STRING.Eb5.26 STRING.E5..27 STRING.F5..28 STRING.Gb5.29 
-  STRING.G5..30 STRING.Ab5.31 STRING.1..32 STRING.2..33 STRING.4..34 
-  STRING.8..35 STRING.16.36 STRING.32.37 STRING.64.38 
-  STRING.Invalid.note.given...39 STRING.The.tune.will.play.f.40 
-  STRING.seconds..at.120.BPM.41 STRING.Hello..Here.are.the..42 
-  STRING.Type..S.X..to.change.43 STRING.Type.T.followed.by.a.44 
-  STRING.Type.W.followed.by.a.45 
+  STRING.exiting....Enjoy.som.9 STRING.0123456789.10 STRING.fuck.you.11 
+  STRING.Please.enter.a.comma.12 STRING.Hello..Here.are.the..1 
+  STRING.Type..S.X..to.change.2 STRING.Type..T..followed.by.3 
+  STRING.Type..W..followed.by.4 STRING.Type..M..to.use.the..5 
+  STRING.Specify.the.note.you.6 STRING.Type..F..to.exit..7 STRING.rst.8 
+  STRING.Eb3.9 STRING.E3..10 STRING.F3..11 STRING.Gb3.12 STRING.G3..13 
+  STRING.Ab3.14 STRING.A3..15 STRING.Bb3.16 STRING.B3..17 STRING.C4..18 
+  STRING.Db4.19 STRING.D4..20 STRING.Eb4.21 STRING.E4..22 STRING.F4..23 
+  STRING.Gb4.24 STRING.G4..25 STRING.Ab4.26 STRING.A4..27 STRING.Bb4.28 
+  STRING.B4..29 STRING.C5..30 STRING.Db5.31 STRING.D5..32 STRING.Eb5.33 
+  STRING.E5..34 STRING.F5..35 STRING.Gb5.36 STRING.G5..37 STRING.Ab5.38 
+  STRING.64.39 STRING.32.40 STRING.16.41 STRING.8..42 STRING.4..43 STRING.2..44 
+  STRING.1..45 STRING.Invalid.note.given...46 STRING.The.tune.will.play.f.47 
+  STRING.seconds..at.120.BPM.48 
 SECTION: ".abs_section_8"
   _PORTE 
 SECTION: ".abs_section_9"
@@ -1976,17 +1980,17 @@ OBJECT LIST SORTED BY ADDRESS
      _CAN4TXDLR                                 2BC       1       1       0   .abs_section_2bc
      _CAN4TXTBPR                                2BD       1       1       0   .abs_section_2bd
      _CAN4TXTSR                                 2BE       2       2       0   .abs_section_2be
-     note                                      1100      3E      62       1   .data       
-     mii_song_notes                            113E      28      40       1   .data       
-     mii_song_duration                         1166      28      40       1   .data       
-     duration                                  118E      10      16       1   .data       
-     period                                    119E       2       2       3   .data       
-     j                                         11A0       2       2       6   .bss        
-     exercise_1_flag                           11A2       2       2       2   .bss        
-     new_command                               11A4       2       2       7   .bss        
-     sentence                                  11A6      64     100       3   .common     
-     command                                   120A      64     100       6   .common     
-     errno                                     126E       2       2       2   .common     
+     note                                      2000      3E      62       1   .data       
+     mii_song_notes                            203E      28      40       1   .data       
+     mii_song_duration                         2066      28      40       1   .data       
+     duration                                  208E       E      14       1   .data       
+     period                                    209C       2       2       3   .data       
+     j                                         209E       2       2       6   .bss        
+     exercise_1_flag                           20A0       2       2       2   .bss        
+     new_command                               20A2       2       2       7   .bss        
+     sentence                                  20A4      1E      30       3   .common     
+     command                                   20C2      1E      30       6   .common     
+     errno                                     20E0       2       2       2   .common     
      Init                                      C000      29      41       1   .init       
      _Startup                                  C029      12      18       0   .init       
      STRING.Exercise.1.completed.1             C045      16      22       1   .rodata1    
@@ -1997,91 +2001,94 @@ OBJECT LIST SORTED BY ADDRESS
      STRING.You.have.entered.an..6             C16D      51      81       1   .rodata1    
      STRING.You.have.tried.to.us.7             C1BE      7E     126       1   .rodata1    
      STRING.You.have.tried.to.us.8             C23C      7B     123       1   .rodata1    
-     STRING.0123456789.9                       C2B7       B      11       1   .rodata1    
-     STRING.exiting....10                      C2C2       B      11       1   .rodata1    
-     STRING.fuck.you.11                        C2CD       9       9       1   .rodata1    
-     STRING.Please.enter.a.comma.12            C2D6      17      23       1   .rodata1    
-     STRING.rst.1                              C2ED       4       4       1   .rodata1    
-     STRING.Eb3.2                              C2F1       4       4       1   .rodata1    
-     STRING.E3..3                              C2F5       4       4       1   .rodata1    
-     STRING.F3..4                              C2F9       4       4       1   .rodata1    
-     STRING.Gb3.5                              C2FD       4       4       1   .rodata1    
-     STRING.G3..6                              C301       4       4       1   .rodata1    
-     STRING.Ab3.7                              C305       4       4       1   .rodata1    
-     STRING.A3..8                              C309       4       4       1   .rodata1    
-     STRING.Bb3.9                              C30D       4       4       1   .rodata1    
-     STRING.B3..10                             C311       4       4       1   .rodata1    
-     STRING.C4..11                             C315       4       4       1   .rodata1    
-     STRING.Db4.12                             C319       4       4       1   .rodata1    
-     STRING.D4..13                             C31D       4       4       1   .rodata1    
-     STRING.Eb4.14                             C321       4       4       1   .rodata1    
-     STRING.E4..15                             C325       4       4       1   .rodata1    
-     STRING.F4..16                             C329       4       4       1   .rodata1    
-     STRING.Gb4.17                             C32D       4       4       1   .rodata1    
-     STRING.G4..18                             C331       4       4       1   .rodata1    
-     STRING.Ab4.19                             C335       4       4       1   .rodata1    
-     STRING.A4..20                             C339       4       4       1   .rodata1    
-     STRING.Bb4.21                             C33D       4       4       1   .rodata1    
-     STRING.B4..22                             C341       4       4       1   .rodata1    
-     STRING.C5..23                             C345       4       4       1   .rodata1    
-     STRING.Db5.24                             C349       4       4       1   .rodata1    
-     STRING.D5..25                             C34D       4       4       1   .rodata1    
-     STRING.Eb5.26                             C351       4       4       1   .rodata1    
-     STRING.E5..27                             C355       4       4       1   .rodata1    
-     STRING.F5..28                             C359       4       4       1   .rodata1    
-     STRING.Gb5.29                             C35D       4       4       1   .rodata1    
-     STRING.G5..30                             C361       4       4       1   .rodata1    
-     STRING.Ab5.31                             C365       4       4       1   .rodata1    
-     STRING.1..32                              C369       3       3       1   .rodata1    
-     STRING.2..33                              C36C       3       3       1   .rodata1    
-     STRING.4..34                              C36F       3       3       1   .rodata1    
-     STRING.8..35                              C372       3       3       1   .rodata1    
-     STRING.16.36                              C375       3       3       1   .rodata1    
-     STRING.32.37                              C378       3       3       1   .rodata1    
-     STRING.64.38                              C37B       3       3       1   .rodata1    
-     STRING.Invalid.note.given...39            C37E      4F      79       1   .rodata1    
-     STRING.The.tune.will.play.f.40            C3CD      26      38       1   .rodata1    
-     STRING.seconds..at.120.BPM.41             C3F3      14      20       1   .rodata1    
-     STRING.Hello..Here.are.the..42            C407      54      84       1   .rodata1    
-     STRING.Type..S.X..to.change.43            C45B      61      97       1   .rodata1    
-     STRING.Type.T.followed.by.a.44            C4BC      5A      90       1   .rodata1    
-     STRING.Type.W.followed.by.a.45            C516      56      86       1   .rodata1    
-     main                                      C56C      86     134       1   .text       
-     serialISR                                 C5F2      7D     125       1   .text       
-     speakerISR                                C66F       8       8       1   .text       
-     run_instruction                           C677     10E     270       4   .text       
-     play_note                                 C785      31      49       2   .text       
-     play_song                                 C7B6      30      48       1   .text       
-     play_mii                                  C7E6      1F      31       1   .text       
-     death_to_hcs12                            C805      29      41       1   .text       
-     isdigit                                   C82E       E      14       1   .text       
-     isspace                                   C83C      17      23       2   .text       
-     toupper                                   C853      14      20       3   .text       
-     CheckCharWithBase                         C867      39      57       1   .text       
-     _strtoul                                  C8A0     170     368       8   .text       
-     _strtol                                   CA10      D0     208       3   .text       
-     strtol                                    CAE0      13      19       2   .text       
-     strlen                                    CAF3      14      20       6   .text       
-     strcpy                                    CB07       D      13       1   .text       
-     strncpy                                   CB14      2D      45       2   .text       
-     strcmp                                    CB41      19      25       3   .text       
-     serialRegisters                           CB5A       E      14       1   .text       
-     SerialOutputString                        CB68      2C      44       7   .text       
-     SerialOutputChar                          CB94       9       9       2   .text       
-     sevensegmodule                            CB9D      5D      93       2   .text       
-     ledOn                                     CBFA      13      19       2   .text       
-     ledOff                                    CC0D       E      14       3   .text       
-     timedLED                                  CC1B      12      18       1   .text       
-     command_to_tune                           CC2D     250     592       4   .text       
-     print_help                                CE7D      1F      31       1   .text       
-     delay_ms                                  CE9C      1F      31       2   .text       
-     setup_timers                              CEBB       B      11       1   .text       
-     _LCMP_P                                   CEC6      15      21       1   RUNTIME     
-     _LNEG                                     CEDB       D      13       2   RUNTIME     
-     _LMULS16x32                               CEE8      1F      31       1   RUNTIME     
-     _lDivMod                                  CF07      BE     190       1   RUNTIME     
-     _LDIVU                                    CFC5       E      14       1   RUNTIME     
-     _ILSEXT                                   CFD3       7       7       2   RUNTIME     
+     STRING.exiting....Enjoy.som.9             C2B7      23      35       1   .rodata1    
+     STRING.0123456789.10                      C2DA       B      11       1   .rodata1    
+     STRING.fuck.you.11                        C2E5       9       9       1   .rodata1    
+     STRING.Please.enter.a.comma.12            C2EE      17      23       1   .rodata1    
+     STRING.Hello..Here.are.the..1             C305      54      84       1   .rodata1    
+     STRING.Type..S.X..to.change.2             C359      61      97       1   .rodata1    
+     STRING.Type..T..followed.by.3             C3BA      5C      92       1   .rodata1    
+     STRING.Type..W..followed.by.4             C416      46      70       1   .rodata1    
+     STRING.Type..M..to.use.the..5             C45C      21      33       1   .rodata1    
+     STRING.Specify.the.note.you.6             C47D      85     133       1   .rodata1    
+     STRING.Type..F..to.exit..7                C502      12      18       1   .rodata1    
+     STRING.rst.8                              C514       4       4       1   .rodata1    
+     STRING.Eb3.9                              C518       4       4       1   .rodata1    
+     STRING.E3..10                             C51C       4       4       1   .rodata1    
+     STRING.F3..11                             C520       4       4       1   .rodata1    
+     STRING.Gb3.12                             C524       4       4       1   .rodata1    
+     STRING.G3..13                             C528       4       4       1   .rodata1    
+     STRING.Ab3.14                             C52C       4       4       1   .rodata1    
+     STRING.A3..15                             C530       4       4       1   .rodata1    
+     STRING.Bb3.16                             C534       4       4       1   .rodata1    
+     STRING.B3..17                             C538       4       4       1   .rodata1    
+     STRING.C4..18                             C53C       4       4       1   .rodata1    
+     STRING.Db4.19                             C540       4       4       1   .rodata1    
+     STRING.D4..20                             C544       4       4       1   .rodata1    
+     STRING.Eb4.21                             C548       4       4       1   .rodata1    
+     STRING.E4..22                             C54C       4       4       1   .rodata1    
+     STRING.F4..23                             C550       4       4       1   .rodata1    
+     STRING.Gb4.24                             C554       4       4       1   .rodata1    
+     STRING.G4..25                             C558       4       4       1   .rodata1    
+     STRING.Ab4.26                             C55C       4       4       1   .rodata1    
+     STRING.A4..27                             C560       4       4       1   .rodata1    
+     STRING.Bb4.28                             C564       4       4       1   .rodata1    
+     STRING.B4..29                             C568       4       4       1   .rodata1    
+     STRING.C5..30                             C56C       4       4       1   .rodata1    
+     STRING.Db5.31                             C570       4       4       1   .rodata1    
+     STRING.D5..32                             C574       4       4       1   .rodata1    
+     STRING.Eb5.33                             C578       4       4       1   .rodata1    
+     STRING.E5..34                             C57C       4       4       1   .rodata1    
+     STRING.F5..35                             C580       4       4       1   .rodata1    
+     STRING.Gb5.36                             C584       4       4       1   .rodata1    
+     STRING.G5..37                             C588       4       4       1   .rodata1    
+     STRING.Ab5.38                             C58C       4       4       1   .rodata1    
+     STRING.64.39                              C590       3       3       1   .rodata1    
+     STRING.32.40                              C593       3       3       1   .rodata1    
+     STRING.16.41                              C596       3       3       1   .rodata1    
+     STRING.8..42                              C599       3       3       1   .rodata1    
+     STRING.4..43                              C59C       3       3       1   .rodata1    
+     STRING.2..44                              C59F       3       3       1   .rodata1    
+     STRING.1..45                              C5A2       3       3       1   .rodata1    
+     STRING.Invalid.note.given...46            C5A5      4F      79       1   .rodata1    
+     STRING.The.tune.will.play.f.47            C5F4      26      38       1   .rodata1    
+     STRING.seconds..at.120.BPM.48             C61A      14      20       1   .rodata1    
+     main                                      C62E      86     134       1   .text       
+     serialISR                                 C6B4      7D     125       1   .text       
+     speakerISR                                C731       8       8       1   .text       
+     run_instruction                           C739     10D     269       4   .text       
+     play_song                                 C846      31      49       1   .text       
+     play_note                                 C877      31      49       2   .text       
+     play_mii                                  C8A8      1F      31       1   .text       
+     death_to_hcs12                            C8C7      29      41       1   .text       
+     isdigit                                   C8F0       E      14       1   .text       
+     isspace                                   C8FE      17      23       2   .text       
+     toupper                                   C915      14      20       3   .text       
+     CheckCharWithBase                         C929      39      57       1   .text       
+     _strtoul                                  C962     170     368       8   .text       
+     _strtol                                   CAD2      D0     208       3   .text       
+     strtol                                    CBA2      13      19       2   .text       
+     strlen                                    CBB5      14      20       6   .text       
+     strcpy                                    CBC9       D      13       1   .text       
+     strncpy                                   CBD6      2D      45       2   .text       
+     strcmp                                    CC03      19      25       3   .text       
+     serialRegisters                           CC1C       E      14       1   .text       
+     SerialOutputString                        CC2A      2C      44       7   .text       
+     SerialOutputChar                          CC56       9       9       2   .text       
+     sevensegmodule                            CC5F      5D      93       2   .text       
+     ledOn                                     CCBC      13      19       2   .text       
+     ledOff                                    CCCF       E      14       3   .text       
+     timedLED                                  CCDD      12      18       1   .text       
+     print_help                                CCEF      2E      46       1   .text       
+     command_to_tune                           CD1D     277     631       4   .text       
+     delay_ms                                  CF94      1F      31       2   .text       
+     setup_timers                              CFB3       B      11       1   .text       
+     _LCMP_P                                   CFBE      15      21       1   RUNTIME     
+     _LNEG                                     CFD3       D      13       2   RUNTIME     
+     _LMULS16x32                               CFE0      1F      31       1   RUNTIME     
+     _lDivMod                                  CFFF      BE     190       1   RUNTIME     
+     _LDIVU                                    D0BD       E      14       1   RUNTIME     
+     _ILSEXT                                   D0CB       7       7       2   RUNTIME     
      _Vector_21                                FFD4       2       2       0   .abs_section_ffd4
      _Vector_13                                FFE4       2       2       0   .abs_section_ffe4
 
@@ -2122,42 +2129,42 @@ serial.c.o:
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xCFDA ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xD0D2 ---- SIZE       4 ---
 Filling bytes inserted
- 009F1101
-------- ROM-ADDRESS: 0xCFDE ---- RAM-ADDRESS: 0x1101 ---- SIZE      61 ---
+ 009D2001
+------- ROM-ADDRESS: 0xD0D6 ---- RAM-ADDRESS: 0x2001 ---- SIZE      61 ---
 Name of initialized Object : note:1
  1425A9238C 218D1FAB1D E41C371AA1
  192217B916 65152313F3 12D411C610
  C60FD50EF2 0E1B0D500E 1B0BDC0B32
  0A9109F909 6A08E30863 07EA077907
  0D
-------- ROM-ADDRESS: 0xD01B ---- SIZE       1 ---
+------- ROM-ADDRESS: 0xD113 ---- SIZE       1 ---
 Filling bytes inserted
  00
-------- ROM-ADDRESS: 0xD01C ---- RAM-ADDRESS: 0x113F ---- SIZE      39 ---
+------- ROM-ADDRESS: 0xD114 ---- RAM-ADDRESS: 0x203F ---- SIZE      39 ---
 Name of initialized Object : mii_song_notes:1
  1000130017 0013001000 0C0000000C
  0000000C00 0000100013 0017000000
  130010001A 00190018
-------- ROM-ADDRESS: 0xD043 ---- SIZE       1 ---
+------- ROM-ADDRESS: 0xD13B ---- SIZE       1 ---
 Filling bytes inserted
  00
-------- ROM-ADDRESS: 0xD044 ---- RAM-ADDRESS: 0x1167 ---- SIZE      39 ---
+------- ROM-ADDRESS: 0xD13C ---- RAM-ADDRESS: 0x2067 ---- SIZE      39 ---
 Name of initialized Object : mii_song_duration:1
- 0600060006 0006000600 0600060006
- 0006000600 0400060006 0006000700
- 0600060005 00060006
-------- ROM-ADDRESS: 0xD06B ---- SIZE       1 ---
+ 0500050005 0005000500 0500050005
+ 0005000500 0300050005 0005000600
+ 0500050004 00050005
+------- ROM-ADDRESS: 0xD163 ---- SIZE       1 ---
 Filling bytes inserted
  00
-------- ROM-ADDRESS: 0xD06C ---- RAM-ADDRESS: 0x118F ---- SIZE      15 ---
+------- ROM-ADDRESS: 0xD164 ---- RAM-ADDRESS: 0x208F ---- SIZE      13 ---
 Name of initialized Object : duration:1
- 8000400020 0010000800 0400020001
-------- ROM-ADDRESS: 0xD07B ---- RAM-ADDRESS: 0x119E ---- SIZE       2 ---
+ 4000200010 0008000400 020001
+------- ROM-ADDRESS: 0xD171 ---- RAM-ADDRESS: 0x209C ---- SIZE       2 ---
 Name of initialized Object : period
- 03E8
-------- ROM-ADDRESS: 0xD07D ---- SIZE       2 ---
+ 4240
+------- ROM-ADDRESS: 0xD173 ---- SIZE       2 ---
 Filling bytes inserted
  0000
 
@@ -2168,22 +2175,22 @@ Init                      USES _startupData
 _Startup                  USES __SEG_END_SSTACK Init main 
 main                      USES STRING.Exercise.1.completed.1 
                                 STRING..Hello..To.proceed...2 serialRegisters setup_timers exercise_1_flag 
-                                play_mii new_command command STRING.kill.yourself.3 
-                                strcmp death_to_hcs12 run_instruction strtol 
-                                sevensegmodule strlen SerialOutputString 
+                                new_command command STRING.kill.yourself.3 strcmp 
+                                death_to_hcs12 run_instruction strtol sevensegmodule play_mii 
+                                strlen SerialOutputString 
 serialISR                 USES STRING.You.ve.exceeded.the..4 strlen _SCI1SR1 
                                 _SCI1DRL j sentence command strcpy new_command 
                                 SerialOutputChar exercise_1_flag 
 speakerISR                USES _TC5 period 
 run_instruction           USES STRING.You.have.tried.to.us.5 
                                 STRING.You.have.entered.an..6 STRING.You.have.tried.to.us.7 
-                                STRING.You.have.tried.to.us.8 STRING.0123456789.9 ledOff ledOn 
-                                run_instruction print_help sevensegmodule STRING.exiting....10 
-                                timedLED command_to_tune play_song strlen 
+                                STRING.You.have.tried.to.us.8 STRING.exiting....Enjoy.som.9 
+                                STRING.0123456789.10 ledOff ledOn run_instruction print_help 
+                                sevensegmodule timedLED command_to_tune play_song strlen 
                                 SerialOutputString new_command 
+play_song                 USES play_note 
 play_note                 USES duration note period _TCTL1 _TIE _TCNT _TC5 
                                 delay_ms 
-play_song                 USES play_note 
 play_mii                  USES mii_song_notes mii_song_duration play_note 
 death_to_hcs12            USES new_command STRING.fuck.you.11 
                                 SerialOutputString STRING.Please.enter.a.comma.12 
@@ -2199,22 +2206,24 @@ sevensegmodule            USES _PORTAB _DDRAB _DDRP _PTP
 ledOn                     USES _DDRAB _DDRJ _PTJ _PORTAB _DDRP _PTP 
 ledOff                    USES _DDRAB _DDRJ _PTJ _PORTAB 
 timedLED                  USES ledOn delay_ms ledOff 
-command_to_tune           USES STRING.rst.1 STRING.Eb3.2 STRING.E3..3 
-                                STRING.F3..4 STRING.Gb3.5 STRING.G3..6 STRING.Ab3.7 
-                                STRING.A3..8 STRING.Bb3.9 STRING.B3..10 STRING.C4..11 
-                                STRING.Db4.12 STRING.D4..13 STRING.Eb4.14 STRING.E4..15 
-                                STRING.F4..16 STRING.Gb4.17 STRING.G4..18 STRING.Ab4.19 
-                                STRING.A4..20 STRING.Bb4.21 STRING.B4..22 STRING.C5..23 
-                                STRING.Db5.24 STRING.D5..25 STRING.Eb5.26 STRING.E5..27 
-                                STRING.F5..28 STRING.Gb5.29 STRING.G5..30 STRING.Ab5.31 
-                                STRING.1..32 STRING.2..33 STRING.4..34 STRING.8..35 
-                                STRING.16.36 STRING.32.37 STRING.64.38 
-                                STRING.Invalid.note.given...39 STRING.The.tune.will.play.f.40 
-                                STRING.seconds..at.120.BPM.41 command_to_tune strncpy strcmp strtol strlen 
+print_help                USES STRING.Hello..Here.are.the..1 
+                                STRING.Type..S.X..to.change.2 STRING.Type..T..followed.by.3 
+                                STRING.Type..W..followed.by.4 STRING.Type..M..to.use.the..5 
+                                STRING.Specify.the.note.you.6 STRING.Type..F..to.exit..7 strlen 
                                 SerialOutputString 
-print_help                USES STRING.Hello..Here.are.the..42 
-                                STRING.Type..S.X..to.change.43 STRING.Type.T.followed.by.a.44 
-                                STRING.Type.W.followed.by.a.45 strlen SerialOutputString 
+command_to_tune           USES STRING.rst.8 STRING.Eb3.9 STRING.E3..10 
+                                STRING.F3..11 STRING.Gb3.12 STRING.G3..13 STRING.Ab3.14 
+                                STRING.A3..15 STRING.Bb3.16 STRING.B3..17 STRING.C4..18 
+                                STRING.Db4.19 STRING.D4..20 STRING.Eb4.21 STRING.E4..22 
+                                STRING.F4..23 STRING.Gb4.24 STRING.G4..25 STRING.Ab4.26 
+                                STRING.A4..27 STRING.Bb4.28 STRING.B4..29 STRING.C5..30 
+                                STRING.Db5.31 STRING.D5..32 STRING.Eb5.33 STRING.E5..34 
+                                STRING.F5..35 STRING.Gb5.36 STRING.G5..37 STRING.Ab5.38 
+                                STRING.64.39 STRING.32.40 STRING.16.41 STRING.8..42 
+                                STRING.4..43 STRING.2..44 STRING.1..45 
+                                STRING.Invalid.note.given...46 STRING.The.tune.will.play.f.47 
+                                STRING.seconds..at.120.BPM.48 command_to_tune strncpy strcmp strtol strlen 
+                                SerialOutputString 
 setup_timers              USES _TSCR1 _TSCR2 _TIOS 
 _LMULS16x32               USES _LNEG 
 _LDIVU                    USES _lDivMod 
@@ -2232,12 +2241,6 @@ DEPENDENCY TREE
  |  |    
  |  +- setup_timers        
  |  |    
- |  +- play_mii            
- |  |  | 
- |  |  +- play_note           
- |  |     | 
- |  |     +- delay_ms            
- |  |          
  |  +- strcmp              
  |  |    
  |  +- death_to_hcs12      
@@ -2262,8 +2265,8 @@ DEPENDENCY TREE
  |  |  |  | 
  |  |  |  +- ledOn                (see above)
  |  |  |  |  
- |  |  |  +- delay_ms             (see above)
- |  |  |  |  
+ |  |  |  +- delay_ms            
+ |  |  |  |    
  |  |  |  +- ledOff               (see above)
  |  |  |     
  |  |  +- command_to_tune     
@@ -2310,8 +2313,10 @@ DEPENDENCY TREE
  |  |  |     
  |  |  +- play_song           
  |  |  |  | 
- |  |  |  +- play_note            (see above)
- |  |  |     
+ |  |  |  +- play_note           
+ |  |  |     | 
+ |  |  |     +- delay_ms             (see above)
+ |  |  |        
  |  |  +- strlen               (see above)
  |  |  |  
  |  |  +- SerialOutputString   (see above)
@@ -2320,6 +2325,10 @@ DEPENDENCY TREE
  |  |  
  |  +- sevensegmodule       (see above)
  |  |  
+ |  +- play_mii            
+ |  |  | 
+ |  |  +- play_note            (see above)
+ |  |     
  |  +- strlen               (see above)
  |  |  
  |  +- SerialOutputString   (see above)
@@ -2350,6 +2359,6 @@ STATISTIC SECTION
 
 ExeFile:
 --------
-Number of blocks to be downloaded: 8
-Total size of all blocks to be downloaded: 4229
+Number of blocks to be downloaded: 7
+Total size of all blocks to be downloaded: 4475
 

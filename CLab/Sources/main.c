@@ -6,8 +6,11 @@
 #include "command.h"
 #include "timing.h"
 
+
+//define the command buffer
 #define BUFFER 100
-#define TUNE_SIZE 100
+
+//define each of the periods used for the notes
 
 #define rest 20
 #define Eb3 9641
@@ -52,6 +55,8 @@
 #define quaver    2
 #define semiquav  1
 
+#define numnotes 31
+#define numdurations 7
 
                                     //index's 
                                     
@@ -88,9 +93,10 @@ unsigned int note[] = {rest,        //0
     Ab5                             //30
     };
 
-                                                
+//some outro music                                               
 int mii_song_notes[] = {16, 19, 23, 19, 16, 12, 0, 12, 0, 12, 0, 16, 19, 23, 0, 19, 16, 26, 25, 24};  //20
-int mii_song_duration[] = {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 7, 6, 6, 5, 6, 6};
+int mii_song_duration[] = {5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 3, 5, 5, 5, 6, 5, 5, 4, 5, 5};
+
 
 //most songs play at 120 bpm
 //2 beats per second
@@ -100,7 +106,6 @@ int mii_song_duration[] = {6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 4, 6, 6, 6, 7, 6, 6, 5,
 
 unsigned int duration[] =
 {
-    longnote,
     dbreve,
     breve,
     semibreve,
@@ -115,27 +120,30 @@ unsigned int duration[] =
 interrupt 21 void serialISR();
 interrupt 13 void speakerISR();
 void run_instruction(char *instruction);
-void death_to_hcs12(void);
+void death_to_hcs12();
 void play_note(int note_num, int duration_num);
 void play_song(int *notes, int *durations);
-void play_mii(void);
+void play_mii();
 
 //variable for the period of the note being played
-volatile int period = 1000;
+volatile int period = 1000000;
 
 
 //global variables involved in interrupt sequence
 
+char sentence[BUFFER];
 
-char sentence[BUFFER];  //takes input 
-char command[BUFFER];   //stores the serial input
+//stores the command and allows you to enter another one   
+char command[BUFFER];   
 
+//keeps track of the length of command
+int j = 0;     
 
-int j = 0;     //keeps track of the length of command
+//has exercise 1 been completed 
 int exercise_1_flag = 0;
 
 //new command is zero if there is a new command that hasn't been read
-//if the command has been read it will be zero
+//if the command has been read it will be zero otherwise it will be 1
 int new_command = 0;
 
 void main() 
@@ -143,7 +151,7 @@ void main()
   int number;
   
   
-  //strings to be used in program
+  //strings to be used in main
   char* completed_1 = "Exercise 1 completed!";
   char* welcome_message = "\nHello!\nTo proceed, please enter a command. If you don't know the current commands type 'H'.\nEnjoy!";
    
@@ -158,33 +166,26 @@ void main()
 	//setup timer for prescaler of 8, output compare on TC5 and toggling of speaker. NO interrupts enabled.
 	setup_timers();
 	
-	
+	//Enable all interrupts
   EnableInterrupts;
-  
   
   
   //exercise 1 demonstration
   while(exercise_1_flag == 0){
   }
   
+  //Output the completion message
   SerialOutputString(completed_1, strlen(completed_1));
   
-  
-  
-  //testing speaker function
-  play_mii();
-  
-  
+
   //Exercise 2 demonstration
   SerialOutputString(welcome_message, strlen(welcome_message));
   
-  //enable everything
-  
-  
+ 
+  // ensure that the program knows there is no new command at the moment
   new_command = 0;
-  
-  
-  
+   
+  //keeps running instruction 
   while(command[0] != 'F'){
     
     while(new_command == 0);
@@ -201,23 +202,10 @@ void main()
     
   }
    
-  
-  while(command[0] != 'F'){
-    
-    if(new_command == 1 ) {
-      number = atoi(command);
-      sevensegmodule(number);
-      new_command = 0;
-    }
-  }
  
-  //test leds
-  //ledOn();
-  
-  
+  //goodbye message
+  play_mii();
  
-  
-  //poll command char
   
   for(;;);
 }
@@ -304,12 +292,15 @@ void run_instruction(char *instruction) {
   char *error2 = "You have entered an invalid command. You can type 'H' for help on valid commands";
   char *error_sseg = "You have tried to use an Seven Seg command, but entered an invalid argument. This command accepts the arguments integers 0-9.";
   char *error_time = "You have tried to use a LED timed command but entered an invalid argument.This command accepts the arguments integers 0-9.";
+  char* exit_message = "exiting...\nEnjoy some outro music!";
   int sseg_arg;
   char *nums = "0123456789";
   int i;
+  int notes[numnotes];
+  int durations[numdurations];
   
   
-  if (command == 'L') {                                        // Handling for the LED functions
+  if (command == 'L') {                                         // Handling for the LED functions
     char led_arg = instruction[2];
     if (led_arg == '0') {
       ledOff();  
@@ -325,10 +316,10 @@ void run_instruction(char *instruction) {
     string_out = instruction+2;
     SerialOutputString(string_out, strlen(string_out));
   }
-  else if (command == 'H') {                                  //Handling for help function
+  else if (command == 'H') {                                   //Handling for help function
     print_help();
   }
-  else if (command == 'S'){                                  //Handling for 7-seg function
+  else if (command == 'S'){                                    //Handling for 7-seg function
   
     for(i = 0; i < 10; i++){
       if(instruction[2] == nums[i]){
@@ -351,14 +342,14 @@ void run_instruction(char *instruction) {
        SerialOutputString(error_sseg, strlen(error_sseg));
       
     }
-  } else if (command == 'F'){                           //Exit command
+  } else if (command == 'F'){                                 //Exit command
        ledOff();
-       SerialOutputString("exiting...", 10);
-  } else if (command == 'T'){                           //Handling for timed LED command
-    
+       SerialOutputString(exit_message, strlen(exit_message));
+  } else if (command == 'T'){                                 //Handling for timed LED command
+                                                             
     sseg_arg = -1;
     for(i = 0; i < 10; i++){
-      if(instruction[2] == nums[i]){         //use the seven seg arg for this as well cos im lazy
+      if(instruction[2] == nums[i]){                          //use the seven seg arg for this as well cos im lazy
         sseg_arg = i;
       }
     }
@@ -366,19 +357,16 @@ void run_instruction(char *instruction) {
     if(sseg_arg == -1){
       
       SerialOutputString(error_time, strlen(error_time));
-    } else{
+    }else{
     
       timedLED(sseg_arg);
     }
+  }else if (command == 'M'){                                  //handling for music module
+    
+    command_to_tune(&instruction[2], notes, durations); 
+    play_song(notes, durations);
       
-  }
-  else if (command == 'M') {
-    int notes[TUNE_SIZE];
-    int durations[TUNE_SIZE];
-    command_to_tune(&instruction[2], &notes[0], &durations[0]);
-    play_song(&notes[0], &durations[0]);
-  }
-  else {   
+  }else {   
     SerialOutputString(error2, strlen(error2));
   }
   
@@ -387,6 +375,16 @@ void run_instruction(char *instruction) {
 }
 
 
+void play_song(int *notes, int *durations){
+
+  int i = 0;
+  
+  while(notes[i] != -1){
+    play_note(notes[i], durations[i]);
+    i++;
+  }
+ 
+}
 
 
 //this function plays a note based on two inputs
@@ -394,6 +392,7 @@ void run_instruction(char *instruction) {
 //2nd input: index of duration in duration array defined above.
 
 //no outputs - just plays the note for the desired duration
+
 void play_note(int note_num, int duration_num) {
   
   int time = duration[duration_num]*125;
@@ -419,15 +418,9 @@ void play_note(int note_num, int duration_num) {
   
 }
 
-void play_song(int *notes, int *durations) {
-  int i = 0;
-  while (notes[i] != -1) {
-    play_note(notes[i], durations[i]);
-    i++;
-  }
-}
 
-void play_mii(void) {
+//function that plays the mii soundtrack
+void play_mii() {
 int i;
 
 
@@ -442,7 +435,7 @@ return;
 
 
 //a little easter egg
-void death_to_hcs12(void){
+void death_to_hcs12(){
   
   int i;
   new_command = 0;
