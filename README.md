@@ -57,16 +57,11 @@ Once the user is finished with entering their own tunes, they can enter the fina
 Exercise 1
 
 >input = "hello/n"
->
 >output (terminal) = "hello\n"
->
 >output (terminal) = "Exercise 1 completed!\n"
->
 >output (terminal) = "\nHello!\nTo proceed, please enter a command. If you don't know the current commands type 'H'.\nEnjoy!"
-
-
-
-note: as input is typed each character will be displayed to terminal before the return carage is used. i.e you can see what youre typing before pressing enter
+>
+>note: as input is typed each character will be displayed to terminal before the return carage is used. i.e you can see what youre typing before pressing >enter
 
 
 input = "fjhjkcfhdwkwkjekdejwklcje2cle2jckewjcklewjckecklneklcnekncehckle3hfkld\n"
